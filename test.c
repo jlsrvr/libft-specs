@@ -56,6 +56,8 @@ int main(int ac, char **av)
 	printf("\nTests for ft_isdigit\n");
 
 	chars = "J e\n/:0123456789";
+	succes = 0;
+	failure = 0;
 
 	for(index = 0; chars[index]; index++)
 	{
@@ -63,25 +65,30 @@ int main(int ac, char **av)
 		result = ft_isdigit(chars[index]);
 		if (expected == result)
 		{
-			printf("\033[1;32m");
-			printf("OK for char = \"%c\"\n", chars[index]);
-			printf("\033[0m");
+			succes++;
+			//printf("\033[1;32m");
+			//printf("OK for char = \"%c\"\n", chars[index]);
+			//printf("\033[0m");
 		}
 		else
 		{
-			printf("\033[0;31m--------------\n");
-			printf("KO! for char = \"%c\"\n\n", chars[index]);
+			failure++;
+			printf("--------------\n");
+			printf("\033[0;31mKO! for char = \"%c\"\n\n", chars[index]);
 			printf("\033[1;32mExpected = %s\n", write_boolean(expected));
 			printf("\033[0;31mGot = %s\n\n",  write_boolean(result));
 			printf("\033[0m");
 		}
 	}
+	printf("\t%d success out of %d tests\n", succes, (succes + failure));
 
 	// -----------------------FT_ISALPHA--------------------------
 
 	printf("\nTests for ft_isalpha\n");
 
 	chars = "J1 e\nAaZz@[`{";
+	succes = 0;
+	failure = 0;
 
 	for(index = 0; chars[index]; index++)
 	{
@@ -89,25 +96,30 @@ int main(int ac, char **av)
 		result = ft_isalpha(chars[index]);
 		if (expected == result)
 		{
-			printf("\033[1;32m");
-			printf("OK for char = \"%c\"\n", chars[index]);
-			printf("\033[0m");
+			succes++;
+			//printf("\033[1;32m");
+			//printf("OK for char = \"%c\"\n", chars[index]);
+			//printf("\033[0m");
 		}
 		else
 		{
-			printf("\033[0;31m--------------\n");
-			printf("KO! for char = \"%c\"\n\n", chars[index]);
+			failure++;
+			printf("--------------\n");
+			printf("\033[0;31mKO! for char = \"%c\"\n\n", chars[index]);
 			printf("\033[1;32mExpected = %s\n", write_boolean(expected));
 			printf("\033[0;31mGot = %s\n\n",  write_boolean(result));
 			printf("\033[0m");
 		}
 	}
+	printf("\t%d success out of %d tests\n", succes, (succes + failure));
 
 	// -----------------------FT_STRLEN--------------------------
 
 	printf("\nTests for ft_strlen\n");
 
 	char strs[5][15] = {"Jean", "", " ", "adore vraiment", "\n"} ;
+	succes = 0;
+	failure = 0;
 
 	for(index = 0; index < 5; index++)
 	{
@@ -115,19 +127,22 @@ int main(int ac, char **av)
 		result = ft_strlen(strs[index]);
 		if (expected == result)
 		{
-			printf("\033[1;32m");
-			printf("OK for string = \"%s\"\n", strs[index]);
-			printf("\033[0m");
+			succes++;
+			//printf("\033[1;32m");
+			//printf("OK for string = \"%s\"\n", strs[index]);
+			//printf("\033[0m");
 		}
 		else
 		{
-			printf("\033[0;31m--------------\n");
-			printf("KO! for string = \"%s\"\n\n", strs[index]);
+			failure++;
+			printf("--------------\n");
+			printf("\033[0;31mKO! for string = \"%s\"\n\n", strs[index]);
 			printf("\033[1;32mExpected = %d\n",  expected);
 			printf("\033[0;31mGot = %d\n\n",  result);
 			printf("\033[0m");
 		}
 	}
+	printf("\t%d success out of %d tests\n", succes, (succes + failure));
 
 
 	return (0);
