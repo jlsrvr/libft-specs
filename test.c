@@ -10,6 +10,7 @@ int ft_isalnum(int c);
 int ft_isascii(int c);
 int ft_isprint(int c);
 int ft_toupper(int c);
+int ft_tolower(int c);
 char *write_boolean(int value);
 
 int main(int ac, char **av)
@@ -23,6 +24,35 @@ int main(int ac, char **av)
 
 	(void)ac;
 	(void)av;
+
+	// -----------------------FT_TOLOWER--------------------------
+
+	printf("\nTests for ft_tolower\n");
+
+	succes = 0;
+	failure = 0;
+	for(my_char = 0; my_char < 135; my_char++)
+	{
+		expected = tolower(my_char);
+		result = ft_tolower(my_char);
+		if (expected ==  result)
+		{
+			succes++;
+			//printf("\033[1;32m");
+			//printf("OK for char = \"%c\"\n", my_char);
+			//printf("\033[0m");
+		}
+		else
+		{
+			failure++;
+			printf("--------------\n");
+			printf("\033[0;31mKO! for ascii char = \"%d\"\n\n", my_char);
+			printf("\033[1;32mExpected = %d\n", my_char);
+			printf("\033[0;31mGot = %d\n\n",  my_char);
+			printf("\033[0m");
+		}
+	}
+	printf("\t%d success out of %d tests\n", succes, (succes + failure));
 
 	// -----------------------FT_TOUPPER--------------------------
 
