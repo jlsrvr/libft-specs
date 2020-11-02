@@ -9,11 +9,12 @@ int ft_isdigit(int c);
 int ft_isalnum(int c);
 int ft_isascii(int c);
 int ft_isprint(int c);
+int ft_toupper(int c);
 char *write_boolean(int value);
 
 int main(int ac, char **av)
 {
-	int index;
+	int my_char;
 	int expected;
 	int result;
 	int succes;
@@ -23,28 +24,57 @@ int main(int ac, char **av)
 	(void)ac;
 	(void)av;
 
-	// -----------------------FT_ISPRINT--------------------------
+	// -----------------------FT_TOUPPER--------------------------
 
-	printf("\nTests for ft_isprint\n");
+	printf("\nTests for ft_toupper\n");
 
 	succes = 0;
 	failure = 0;
-	for(index = -2; index < 135; index++)
+	for(my_char = 0; my_char < 135; my_char++)
 	{
-		expected = isprint(index);
-		result = ft_isprint(index);
-		if ((expected && result) || (!expected && !result))
+		expected = toupper(my_char);
+		result = ft_toupper(my_char);
+		if (expected ==  result)
 		{
 			succes++;
 			//printf("\033[1;32m");
-			//printf("OK for char = \"%c\"\n", index);
+			//printf("OK for char = \"%c\"\n", my_char);
 			//printf("\033[0m");
 		}
 		else
 		{
 			failure++;
 			printf("--------------\n");
-			printf("\033[0;31mKO! for ascii char = \"%d\"\n\n", index);
+			printf("\033[0;31mKO! for ascii char = \"%d\"\n\n", my_char);
+			printf("\033[1;32mExpected = %d\n", my_char);
+			printf("\033[0;31mGot = %d\n\n",  my_char);
+			printf("\033[0m");
+		}
+	}
+	printf("\t%d success out of %d tests\n", succes, (succes + failure));
+
+	// -----------------------FT_ISPRINT--------------------------
+
+	printf("\nTests for ft_isprint\n");
+
+	succes = 0;
+	failure = 0;
+	for(my_char = -2; my_char < 135; my_char++)
+	{
+		expected = isprint(my_char);
+		result = ft_isprint(my_char);
+		if ((expected && result) || (!expected && !result))
+		{
+			succes++;
+			//printf("\033[1;32m");
+			//printf("OK for char = \"%c\"\n", my_char);
+			//printf("\033[0m");
+		}
+		else
+		{
+			failure++;
+			printf("--------------\n");
+			printf("\033[0;31mKO! for ascii char = \"%d\"\n\n", my_char);
 			printf("\033[1;32mExpected = %s\n", write_boolean(expected));
 			printf("\033[0;31mGot = %s\n\n",  write_boolean(result));
 			printf("\033[0m");
@@ -58,22 +88,22 @@ int main(int ac, char **av)
 
 	succes = 0;
 	failure = 0;
-	for(index = -2; index < 135; index++)
+	for(my_char = -2; my_char < 135; my_char++)
 	{
-		expected = isascii(index);
-		result = ft_isascii(index);
+		expected = isascii(my_char);
+		result = ft_isascii(my_char);
 		if ((expected && result) || (!expected && !result))
 		{
 			succes++;
 			//printf("\033[1;32m");
-			//printf("OK for char = \"%c\"\n", index);
+			//printf("OK for char = \"%c\"\n", my_char);
 			//printf("\033[0m");
 		}
 		else
 		{
 			failure++;
 			printf("--------------\n");
-			printf("\033[0;31mKO! for ascii char = \"%d\"\n\n", index);
+			printf("\033[0;31mKO! for ascii char = \"%d\"\n\n", my_char);
 			printf("\033[1;32mExpected = %s\n", write_boolean(expected));
 			printf("\033[0;31mGot = %s\n\n",  write_boolean(result));
 			printf("\033[0m");
@@ -89,22 +119,22 @@ int main(int ac, char **av)
 	succes = 0;
 	failure = 0;
 
-	for(index = -2; index < 135; index++)
+	for(my_char = -2; my_char < 135; my_char++)
 	{
-		expected = isalnum(index);
-		result = ft_isalnum(index);
+		expected = isalnum(my_char);
+		result = ft_isalnum(my_char);
 		if ((expected && result) || (!expected && !result))
 		{
 			succes++;
 			//printf("\033[1;32m");
-			//printf("OK for char = \"%c\"\n", index);
+			//printf("OK for char = \"%c\"\n", my_char);
 			//printf("\033[0m");
 		}
 		else
 		{
 			failure++;
 			printf("--------------\n");
-			printf("\033[0;31mKO! for char = \"%c\"\n\n", index);
+			printf("\033[0;31mKO! for char = \"%c\"\n\n", my_char);
 			printf("\033[1;32mExpected = %s\n", write_boolean(expected));
 			printf("\033[0;31mGot = %s\n\n",  write_boolean(result));
 			printf("\033[0m");
@@ -120,22 +150,22 @@ int main(int ac, char **av)
 	succes = 0;
 	failure = 0;
 
-	for(index = -2; index < 135; index++)
+	for(my_char = -2; my_char < 135; my_char++)
 	{
-		expected = isdigit(index);
-		result = ft_isdigit(index);
+		expected = isdigit(my_char);
+		result = ft_isdigit(my_char);
 		if ((expected && result) || (!expected && !result))
 		{
 			succes++;
 			//printf("\033[1;32m");
-			//printf("OK for char = \"%c\"\n", index);
+			//printf("OK for char = \"%c\"\n", my_char);
 			//printf("\033[0m");
 		}
 		else
 		{
 			failure++;
 			printf("--------------\n");
-			printf("\033[0;31mKO! for char = \"%c\"\n\n", index);
+			printf("\033[0;31mKO! for char = \"%c\"\n\n", my_char);
 			printf("\033[1;32mExpected = %s\n", write_boolean(expected));
 			printf("\033[0;31mGot = %s\n\n",  write_boolean(result));
 			printf("\033[0m");
@@ -151,22 +181,22 @@ int main(int ac, char **av)
 	succes = 0;
 	failure = 0;
 
-	for(index = -2; index < 135; index++)
+	for(my_char = -2; my_char < 135; my_char++)
 	{
-		expected = isalpha(index);
-		result = ft_isalpha(index);
+		expected = isalpha(my_char);
+		result = ft_isalpha(my_char);
 		if ((expected && result) || (!expected && !result))
 		{
 			succes++;
 			//printf("\033[1;32m");
-			//printf("OK for char = \"%c\"\n", index);
+			//printf("OK for char = \"%c\"\n", my_char);
 			//printf("\033[0m");
 		}
 		else
 		{
 			failure++;
 			printf("--------------\n");
-			printf("\033[0;31mKO! for char = \"%c\"\n\n", index);
+			printf("\033[0;31mKO! for char = \"%c\"\n\n", my_char);
 			printf("\033[1;32mExpected = %s\n", write_boolean(expected));
 			printf("\033[0;31mGot = %s\n\n",  write_boolean(result));
 			printf("\033[0m");
@@ -182,29 +212,28 @@ int main(int ac, char **av)
 	succes = 0;
 	failure = 0;
 
-	for(index = 0; index < 5; index++)
+	for(my_char = 0; my_char < 5; my_char++)
 	{
-		expected = strlen(strs[index]);
-		result = ft_strlen(strs[index]);
+		expected = strlen(strs[my_char]);
+		result = ft_strlen(strs[my_char]);
 		if ((expected && result) || (!expected && !result))
 		{
 			succes++;
 			//printf("\033[1;32m");
-			//printf("OK for string = \"%s\"\n", strs[index]);
+			//printf("OK for string = \"%s\"\n", strs[my_char]);
 			//printf("\033[0m");
 		}
 		else
 		{
 			failure++;
 			printf("--------------\n");
-			printf("\033[0;31mKO! for string = \"%s\"\n\n", strs[index]);
+			printf("\033[0;31mKO! for string = \"%s\"\n\n", strs[my_char]);
 			printf("\033[1;32mExpected = %d\n",  expected);
 			printf("\033[0;31mGot = %d\n\n",  result);
 			printf("\033[0m");
 		}
 	}
 	printf("\t%d success out of %d tests\n", succes, (succes + failure));
-
 
 	return (0);
 }
