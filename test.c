@@ -7,6 +7,7 @@
 void *ft_memset(void *ptr, int value, size_t num);
 void ft_bzero(void *ptr, size_t num);
 void *ft_memcpy(void *dest, const void *src, size_t n);
+void *ft_memccpy(void *dest, const void *src, int c, size_t n);
 int ft_strlen(char *str);
 int ft_isalpha(int c);
 int ft_isdigit(int c);
@@ -31,6 +32,64 @@ int main(int ac, char **av)
 	(void)ac;
 	(void)av;
 
+	// -----------------------FT_MEMCCPY--------------------------
+
+	printf("\nTests for ft_memccpy\n");
+
+	char *ptn_expected;
+	char *ptn_result;
+	succes = 0;
+	failure = 0;
+
+	for(my_char = 0; my_char < 17; my_char++)
+	{
+		char src[] = "adore\nvra\timent";
+		char dest_expected[] = "J'ai un tab \"\t\" de 21";
+		char dest_result[] = "J'ai un tab \"\t\" de 21";
+
+		ptn_expected = memccpy(dest_expected, src,'n', my_char);
+		ptn_result = ft_memccpy(dest_result, src,'n', my_char);
+		if ((ptn_expected == ptn_result) || !strcmp(ptn_expected, ptn_result))
+		//{
+			succes++;
+			//printf("\033[1;32m");
+			//printf("OK for string = \"%s\"\n", strs[my_char]);
+			//printf("\033[0m");
+		//}
+		else
+		{
+			failure++;
+			printf("--------------\n");
+			printf("\033[0;31mKO! for src = \"%s\" with char = n and size = %d\n\n", src, my_char);
+			printf("\033[1;32mExpected = %s\n",  ptn_expected);
+			printf("\033[0;31mGot = %s\n\n",  ptn_result);
+			printf("\033[0m");
+		}
+
+		char src2[] = "adore\nvra\timent";
+		char dest_expected2[20] = "J'ai";
+		char dest_result2[20] = "J'ai";
+
+		ptn_expected = memccpy(dest_expected2, src2,'n', my_char);
+		ptn_result = ft_memccpy(dest_result2, src2,'n', my_char);
+		if ((ptn_expected == ptn_result) || !strcmp(ptn_expected, ptn_result))
+		{
+			succes++;
+			//printf("\033[1;32m");
+			//printf("OK for string = \"%s\"\n", strs[my_char]);
+			//printf("\033[0m");
+		}
+		else
+		{
+			failure++;
+			printf("--------------\n");
+			printf("\033[0;31mKO! for src = \"%s\" with char = n and size = %d\n\n", src2, my_char);
+			printf("\033[1;32mExpected = %s\n",  ptn_expected);
+			printf("\033[0;31mGot = %s\n\n",  ptn_result);
+			printf("\033[0m");
+		}
+	}
+	printf("\t%d success out of %d tests\n", succes, (succes + failure));
 
 	// -----------------------FT_MEMCPY--------------------------
 
