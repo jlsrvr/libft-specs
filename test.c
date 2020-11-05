@@ -3,6 +3,7 @@
 #include <string.h>
 #include <ctype.h>
 
+void *ft_memset(void *ptr, int value, size_t num);
 int ft_strlen(char *str);
 int ft_isalpha(int c);
 int ft_isdigit(int c);
@@ -24,6 +25,41 @@ int main(int ac, char **av)
 
 	(void)ac;
 	(void)av;
+
+	// -----------------------FT_MEMSET--------------------------
+
+	printf("\nTests for ft_memset\n");
+
+	succes = 0;
+	failure = 0;
+
+	for(my_char = 0; my_char < 23; my_char++)
+	{
+		char str_expected[] = "J'ai un tab \"\t\" de 21";
+		char str_result[] = "J'ai un tab \"\t\" de 21";
+
+		memset(str_expected, '&', my_char);
+		ft_memset(str_result, '&', my_char);
+		if ( strcmp(str_expected, str_result) == 0 )
+		{
+			succes++;
+			//printf("\033[1;32m");
+			//printf("0K! with size = %d for string = \"J'ai un tab \"\t\" de 21\"\n\n", my_char);
+			//printf("Expected = %s\n", str_expected);
+			//printf("Got = %s\n\n",  str_result);
+			//printf("\033[0m");
+		}
+		else
+		{
+			failure++;
+			printf("--------------\n");
+			printf("\033[0;31mKO! with size = %d for string = \"J'ai un tab \"\t\" de 21\"\n\n", my_char);
+			printf("\033[1;32mExpected = %s\n", str_expected);
+			printf("\033[0;31mGot = %s\n\n",  str_result);
+			printf("\033[0m");
+		}
+	}
+	printf("\t%d success out of %d tests\n", succes, (succes + failure));
 
 	// -----------------------FT_TOLOWER--------------------------
 
