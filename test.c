@@ -1,9 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <strings.h>
 #include <ctype.h>
 
 void *ft_memset(void *ptr, int value, size_t num);
+void ft_bzero(void *ptr, size_t num);
 int ft_strlen(char *str);
 int ft_isalpha(int c);
 int ft_isdigit(int c);
@@ -13,6 +15,8 @@ int ft_isprint(int c);
 int ft_toupper(int c);
 int ft_tolower(int c);
 char *write_boolean(int value);
+void print_null_begun_string(void *str, int size);
+int comp_null_begun_strings(char *str1, char *str2, int size);
 
 int main(int ac, char **av)
 {
@@ -25,6 +29,45 @@ int main(int ac, char **av)
 
 	(void)ac;
 	(void)av;
+
+	// -----------------------FT_BZERO--------------------------
+
+	printf("\nTests for ft_bzero\n");
+
+	succes = 0;
+	failure = 0;
+
+	for(my_char = 0; my_char < 23; my_char++)
+	{
+		char str_expected[] = "J'ai un tab \"\t\" de 21";
+		char str_result[] = "J'ai un tab \"\t\" de 21";
+
+		bzero(str_expected, my_char);
+		ft_bzero(str_result, my_char);
+		if ( comp_null_begun_strings(str_expected, str_result, 23) )
+		{
+			succes++;
+			//printf("\033[1;32m");
+			//printf("0K! with size = %d for string = \"J'ai un tab \"\t\" de 21\"\n\n", my_char);
+			//printf("Expected = %s\n", str_expected);
+			//printf("Got = %s\n\n",  str_result);
+			//printf("\033[0m");
+		}
+		else
+		{
+			failure++;
+			printf("--------------\n");
+			printf("\033[0;31mKO! with size = %d for string = \"J'ai un tab \"\t\" de 21\"\n\n", my_char);
+			printf("\033[1;32mExpected =");
+			print_null_begun_string(str_expected, 23);
+			printf("\n");
+			printf("\033[0;31mGot =");
+			print_null_begun_string(str_result, 23);
+			printf("\n\n");
+			printf("\033[0m");
+		}
+	}
+	printf("\t%d success out of %d tests\n", succes, (succes + failure));
 
 	// -----------------------FT_MEMSET--------------------------
 
@@ -302,6 +345,28 @@ int main(int ac, char **av)
 	printf("\t%d success out of %d tests\n", succes, (succes + failure));
 
 	return (0);
+}
+
+int comp_null_begun_strings(char *str1, char *str2, int size)
+{
+	int index;
+
+	index = -1;
+	while (++index < size)
+	{
+		if (str1[index] != str2[index])
+			return (0);
+	}
+	return (1);
+}
+
+void print_null_begun_string(void *ptr, int size)
+{
+	int index;
+
+	index = -1;
+	while (++index < size)
+		printf("%c", ((char*)ptr)[index]);
 }
 
 char *write_boolean(int value)
