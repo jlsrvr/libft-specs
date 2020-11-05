@@ -6,6 +6,7 @@
 
 void *ft_memset(void *ptr, int value, size_t num);
 void ft_bzero(void *ptr, size_t num);
+void *ft_memcpy(void *dest, const void *src, size_t n);
 int ft_strlen(char *str);
 int ft_isalpha(int c);
 int ft_isdigit(int c);
@@ -16,7 +17,7 @@ int ft_toupper(int c);
 int ft_tolower(int c);
 char *write_boolean(int value);
 void print_null_begun_string(void *str, int size);
-int comp_null_begun_strings(char *str1, char *str2, int size);
+int comp_null_begun_strings(void *str1, void *str2, int size);
 
 int main(int ac, char **av)
 {
@@ -29,6 +30,87 @@ int main(int ac, char **av)
 
 	(void)ac;
 	(void)av;
+
+
+	// -----------------------FT_MEMCPY--------------------------
+
+	printf("\nTests for ft_memcpy\n");
+
+	succes = 0;
+	failure = 0;
+
+	for(my_char = 0; my_char < 6; my_char++)
+	{
+		int src[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+		int dest_expected[] ={10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+		int dest_result[] = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+
+		memcpy(dest_expected, src, my_char);
+		ft_memcpy(dest_result, src,  my_char);
+		if ( comp_null_begun_strings(dest_expected, dest_result, 23) )
+		{
+			succes++;
+			//printf("\033[1;32m");
+			//printf("0K! with size = %d for string = \"J'ai un tab \"\t\" de 21\"\n\n", my_char);
+			//printf("Expected = %s\n", str_expected);
+			//printf("Got = %s\n\n",  str_result);
+			//printf("\033[0m");
+		}
+		else
+		{
+			failure++;
+			printf("--------------\n");
+			printf("\033[0;31mKO! with size = %d for string = \"J'ai un tab \"\t\" de 21\"\n\n", my_char);
+			printf("\033[1;32mExpected =");
+			print_null_begun_string(dest_expected, 23);
+			printf("\n");
+			printf("\033[0;31mGot =");
+			print_null_begun_string(dest_result, 23);
+			printf("\n\n");
+			printf("\033[0m");
+		}
+	}
+	printf("\t%d success out of %d tests\n", succes, (succes + failure));
+
+	// -----------------------FT_MEMCPY--------------------------
+
+	printf("\nTests for ft_memcpy\n");
+
+	succes = 0;
+	failure = 0;
+
+	for(my_char = 0; my_char < 6; my_char++)
+	{
+		char src[5] = "\t%1a";
+		char dest_expected[] = "J'ai un tab \"\t\" de 21";
+		char dest_result[] = "J'ai un tab \"\t\" de 21";
+
+		memcpy(dest_expected, src, my_char);
+		ft_memcpy(dest_result, src,  my_char);
+		if ( comp_null_begun_strings(dest_expected, dest_result, 23) )
+		{
+			succes++;
+			//printf("\033[1;32m");
+			//printf("0K! with size = %d for string = \"J'ai un tab \"\t\" de 21\"\n\n", my_char);
+			//printf("Expected = %s\n", str_expected);
+			//printf("Got = %s\n\n",  str_result);
+			//printf("\033[0m");
+		}
+		else
+		{
+			failure++;
+			printf("--------------\n");
+			printf("\033[0;31mKO! with size = %d for string = \"J'ai un tab \"\t\" de 21\"\n\n", my_char);
+			printf("\033[1;32mExpected =");
+			print_null_begun_string(dest_expected, 23);
+			printf("\n");
+			printf("\033[0;31mGot =");
+			print_null_begun_string(dest_result, 23);
+			printf("\n\n");
+			printf("\033[0m");
+		}
+	}
+	printf("\t%d success out of %d tests\n", succes, (succes + failure));
 
 	// -----------------------FT_BZERO--------------------------
 
@@ -347,14 +429,14 @@ int main(int ac, char **av)
 	return (0);
 }
 
-int comp_null_begun_strings(char *str1, char *str2, int size)
+int comp_null_begun_strings(void *str1, void *str2, int size)
 {
 	int index;
 
 	index = -1;
 	while (++index < size)
 	{
-		if (str1[index] != str2[index])
+		if (((char*)str1)[index] != ((char*)str2)[index])
 			return (0);
 	}
 	return (1);
