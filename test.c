@@ -8,6 +8,7 @@ void *ft_memset(void *ptr, int value, size_t num);
 void ft_bzero(void *ptr, size_t num);
 void *ft_memcpy(void *dest, const void *src, size_t n);
 void *ft_memccpy(void *dest, const void *src, int c, size_t n);
+void *ft_memmove(void *dest, const void *src, size_t len);
 int ft_strlen(char *str);
 int ft_isalpha(int c);
 int ft_isdigit(int c);
@@ -32,6 +33,30 @@ int main(int ac, char **av)
 	(void)ac;
 	(void)av;
 
+	// -----------------------FT_MEMMOVE--------------------------
+
+	printf("\nTests for ft_memmove\n");
+
+	succes = 0;
+	failure = 0;
+
+	char str[] = "foo-bar";
+	char str2[] = "foo-bar";
+	memmove(&str[3],&str[4],4);
+	ft_memmove(&str2[3],&str2[4],4);
+	if ( !strcmp(str, str2) )
+		succes++;
+	else
+	{
+		failure++;
+		printf("--------------\n");
+		printf("\033[0;31mKO! start with \"foo-bar\"\n");
+		printf("\033[1;32mExpected = %s\n", str);
+		printf("\033[0;31mGot = %s\n\n", str2);
+		printf("\033[0m");
+	}
+	printf("\t%d success out of %d tests\n", succes, (succes + failure));
+
 	// -----------------------FT_MEMCCPY--------------------------
 
 	printf("\nTests for ft_memccpy\n");
@@ -44,17 +69,17 @@ int main(int ac, char **av)
 	for(my_char = 0; my_char < 17; my_char++)
 	{
 		char src[] = "adore\nvra\timent";
-		char dest_expected[] = "J'ai un tab \"\t\" de 21";
-		char dest_result[] = "J'ai un tab \"\t\" de 21";
+		char dest_expected[25] = "J'ai un tab \"\t\" de 21";
+		char dest_result[25] = "J'ai un tab \"\t\" de 21";
 
 		ptn_expected = memccpy(dest_expected, src,'n', my_char);
 		ptn_result = ft_memccpy(dest_result, src,'n', my_char);
 		if ((ptn_expected == ptn_result) || !strcmp(ptn_expected, ptn_result))
-		//{
+			//{
 			succes++;
-			//printf("\033[1;32m");
-			//printf("OK for string = \"%s\"\n", strs[my_char]);
-			//printf("\033[0m");
+		//printf("\033[1;32m");
+		//printf("OK for string = \"%s\"\n", strs[my_char]);
+		//printf("\033[0m");
 		//}
 		else
 		{
@@ -93,13 +118,15 @@ int main(int ac, char **av)
 
 	// -----------------------FT_MEMCPY--------------------------
 
-	printf("\nTests for ft_memcpy\n");
+	printf("\nTests for ft_memcpy with numbers\n");
 
 	succes = 0;
 	failure = 0;
 
+
 	for(my_char = 0; my_char < 6; my_char++)
 	{
+
 		int src[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 		int dest_expected[] ={10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
 		int dest_result[] = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
@@ -141,8 +168,8 @@ int main(int ac, char **av)
 	for(my_char = 0; my_char < 6; my_char++)
 	{
 		char src[5] = "\t%1a";
-		char dest_expected[] = "J'ai un tab \"\t\" de 21";
-		char dest_result[] = "J'ai un tab \"\t\" de 21";
+		char dest_expected[25] = "J'ai un tab \"\t\" de 21";
+		char dest_result[25] = "J'ai un tab \"\t\" de 21";
 
 		memcpy(dest_expected, src, my_char);
 		ft_memcpy(dest_result, src,  my_char);
