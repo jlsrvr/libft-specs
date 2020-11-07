@@ -21,6 +21,8 @@ int ft_tolower(int c);
 char *write_boolean(int value);
 void print_null_begun_string(void *str, int size);
 int comp_null_begun_strings(void *str1, void *str2, int size);
+void test_ascii_change(int (*og)(int), int (*ft)(int));
+void test_ascii_type(int (*og)(int), int (*ft)(int));
 
 int main(int ac, char **av)
 {
@@ -29,7 +31,6 @@ int main(int ac, char **av)
 	int result;
 	int succes;
 	int failure;
-	char *chars;
 	char *ptn_expected;
 	char *ptn_result;
 
@@ -329,211 +330,37 @@ int main(int ac, char **av)
 	// -----------------------FT_TOLOWER--------------------------
 
 	printf("\nTests for ft_tolower\n");
-
-	succes = 0;
-	failure = 0;
-	for(my_char = 0; my_char < 135; my_char++)
-	{
-		expected = tolower(my_char);
-		result = ft_tolower(my_char);
-		if (expected ==  result)
-		{
-			succes++;
-			//printf("\033[1;32m");
-			//printf("OK for char = \"%c\"\n", my_char);
-			//printf("\033[0m");
-		}
-		else
-		{
-			failure++;
-			printf("--------------\n");
-			printf("\033[0;31mKO! for ascii char = \"%d\"\n\n", my_char);
-			printf("\033[1;32mExpected = %d\n", my_char);
-			printf("\033[0;31mGot = %d\n\n",  my_char);
-			printf("\033[0m");
-		}
-	}
-	printf("\t%d success out of %d tests\n", succes, (succes + failure));
+	test_ascii_change(&tolower, &ft_tolower);
 
 	// -----------------------FT_TOUPPER--------------------------
 
 	printf("\nTests for ft_toupper\n");
-
-	succes = 0;
-	failure = 0;
-	for(my_char = 0; my_char < 135; my_char++)
-	{
-		expected = toupper(my_char);
-		result = ft_toupper(my_char);
-		if (expected ==  result)
-		{
-			succes++;
-			//printf("\033[1;32m");
-			//printf("OK for char = \"%c\"\n", my_char);
-			//printf("\033[0m");
-		}
-		else
-		{
-			failure++;
-			printf("--------------\n");
-			printf("\033[0;31mKO! for ascii char = \"%d\"\n\n", my_char);
-			printf("\033[1;32mExpected = %d\n", my_char);
-			printf("\033[0;31mGot = %d\n\n",  my_char);
-			printf("\033[0m");
-		}
-	}
-	printf("\t%d success out of %d tests\n", succes, (succes + failure));
+	test_ascii_change(&toupper, &ft_toupper);
 
 	// -----------------------FT_ISPRINT--------------------------
 
 	printf("\nTests for ft_isprint\n");
-
-	succes = 0;
-	failure = 0;
-	for(my_char = -2; my_char < 135; my_char++)
-	{
-		expected = isprint(my_char);
-		result = ft_isprint(my_char);
-		if ((expected && result) || (!expected && !result))
-		{
-			succes++;
-			//printf("\033[1;32m");
-			//printf("OK for char = \"%c\"\n", my_char);
-			//printf("\033[0m");
-		}
-		else
-		{
-			failure++;
-			printf("--------------\n");
-			printf("\033[0;31mKO! for ascii char = \"%d\"\n\n", my_char);
-			printf("\033[1;32mExpected = %s\n", write_boolean(expected));
-			printf("\033[0;31mGot = %s\n\n",  write_boolean(result));
-			printf("\033[0m");
-		}
-	}
-	printf("\t%d success out of %d tests\n", succes, (succes + failure));
+	test_ascii_type(&isprint, &ft_isprint);
 
 	// -----------------------FT_ISASCII--------------------------
 
 	printf("\nTests for ft_isascii\n");
-
-	succes = 0;
-	failure = 0;
-	for(my_char = -2; my_char < 135; my_char++)
-	{
-		expected = isascii(my_char);
-		result = ft_isascii(my_char);
-		if ((expected && result) || (!expected && !result))
-		{
-			succes++;
-			//printf("\033[1;32m");
-			//printf("OK for char = \"%c\"\n", my_char);
-			//printf("\033[0m");
-		}
-		else
-		{
-			failure++;
-			printf("--------------\n");
-			printf("\033[0;31mKO! for ascii char = \"%d\"\n\n", my_char);
-			printf("\033[1;32mExpected = %s\n", write_boolean(expected));
-			printf("\033[0;31mGot = %s\n\n",  write_boolean(result));
-			printf("\033[0m");
-		}
-	}
-	printf("\t%d success out of %d tests\n", succes, (succes + failure));
+	test_ascii_type(&isascii, &ft_isascii);
 
 	// -----------------------FT_ISALNUM--------------------------
 
 	printf("\nTests for ft_isalnum\n");
-
-	chars = "J e\n/:0123456789AaZz@[`{";
-	succes = 0;
-	failure = 0;
-
-	for(my_char = -2; my_char < 135; my_char++)
-	{
-		expected = isalnum(my_char);
-		result = ft_isalnum(my_char);
-		if ((expected && result) || (!expected && !result))
-		{
-			succes++;
-			//printf("\033[1;32m");
-			//printf("OK for char = \"%c\"\n", my_char);
-			//printf("\033[0m");
-		}
-		else
-		{
-			failure++;
-			printf("--------------\n");
-			printf("\033[0;31mKO! for char = \"%c\"\n\n", my_char);
-			printf("\033[1;32mExpected = %s\n", write_boolean(expected));
-			printf("\033[0;31mGot = %s\n\n",  write_boolean(result));
-			printf("\033[0m");
-		}
-	}
-	printf("\t%d success out of %d tests\n", succes, (succes + failure));
+	test_ascii_type(&isalnum, &ft_isalnum);
 
 	// -----------------------FT_ISDIGIT--------------------------
 
 	printf("\nTests for ft_isdigit\n");
-
-	chars = "J e\n/:0123456789";
-	succes = 0;
-	failure = 0;
-
-	for(my_char = -2; my_char < 135; my_char++)
-	{
-		expected = isdigit(my_char);
-		result = ft_isdigit(my_char);
-		if ((expected && result) || (!expected && !result))
-		{
-			succes++;
-			//printf("\033[1;32m");
-			//printf("OK for char = \"%c\"\n", my_char);
-			//printf("\033[0m");
-		}
-		else
-		{
-			failure++;
-			printf("--------------\n");
-			printf("\033[0;31mKO! for char = \"%c\"\n\n", my_char);
-			printf("\033[1;32mExpected = %s\n", write_boolean(expected));
-			printf("\033[0;31mGot = %s\n\n",  write_boolean(result));
-			printf("\033[0m");
-		}
-	}
-	printf("\t%d success out of %d tests\n", succes, (succes + failure));
+	test_ascii_type(&isdigit, &ft_isdigit);
 
 	// -----------------------FT_ISALPHA--------------------------
 
 	printf("\nTests for ft_isalpha\n");
-
-	chars = "J1 e\nAaZz@[`{";
-	succes = 0;
-	failure = 0;
-
-	for(my_char = -2; my_char < 135; my_char++)
-	{
-		expected = isalpha(my_char);
-		result = ft_isalpha(my_char);
-		if ((expected && result) || (!expected && !result))
-		{
-			succes++;
-			//printf("\033[1;32m");
-			//printf("OK for char = \"%c\"\n", my_char);
-			//printf("\033[0m");
-		}
-		else
-		{
-			failure++;
-			printf("--------------\n");
-			printf("\033[0;31mKO! for char = \"%c\"\n\n", my_char);
-			printf("\033[1;32mExpected = %s\n", write_boolean(expected));
-			printf("\033[0;31mGot = %s\n\n",  write_boolean(result));
-			printf("\033[0m");
-		}
-	}
-	printf("\t%d success out of %d tests\n", succes, (succes + failure));
+	test_ascii_type(&isalpha, &ft_isalpha);
 
 	// -----------------------FT_STRLEN--------------------------
 
@@ -596,4 +423,72 @@ char *write_boolean(int value)
 	if (value == 0)
 		return ("False");
 	return ("True");
+}
+
+void test_ascii_type(int (*og)(int), int (*ft)(int))
+{
+	int my_char;
+	int expected;
+	int result;
+	int succes;
+	int failure;
+
+	succes = 0;
+	failure = 0;
+	for(my_char = 0; my_char < 135; my_char++)
+	{
+		expected = (*og)(my_char);
+		result = (*ft)(my_char);
+		if ((expected && result) || (!expected && !result))
+		{
+			succes++;
+			//printf("\033[1;32m");
+			//printf("OK for char = \"%c\"\n", my_char);
+			//printf("\033[0m");
+		}
+		else
+		{
+			failure++;
+			printf("--------------\n");
+			printf("\033[0;31mKO! for ascii char = \"%d\"\n\n", my_char);
+			printf("\033[1;32mExpected = %s\n", write_boolean(expected));
+			printf("\033[0;31mGot = %s\n\n",  write_boolean(result));
+			printf("\033[0m");
+		}
+	}
+	printf("\t%d success out of %d tests\n", succes, (succes + failure));
+}
+
+void test_ascii_change(int (*og)(int), int (*ft)(int))
+{
+	int my_char;
+	int expected;
+	int result;
+	int succes;
+	int failure;
+
+	succes = 0;
+	failure = 0;
+	for(my_char = 0; my_char < 135; my_char++)
+	{
+		expected = (*og)(my_char);
+		result = (*ft)(my_char);
+		if (expected ==  result)
+		{
+			succes++;
+			//printf("\033[1;32m");
+			//printf("OK for char = \"%c\"\n", my_char);
+			//printf("\033[0m");
+		}
+		else
+		{
+			failure++;
+			printf("--------------\n");
+			printf("\033[0;31mKO! for ascii char = \"%d\"\n\n", my_char);
+			printf("\033[1;32mExpected = %d\n", my_char);
+			printf("\033[0;31mGot = %d\n\n",  my_char);
+			printf("\033[0m");
+		}
+	}
+	printf("\t%d success out of %d tests\n", succes, (succes + failure));
 }
