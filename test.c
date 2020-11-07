@@ -9,6 +9,7 @@ void ft_bzero(void *ptr, size_t num);
 void *ft_memcpy(void *dest, const void *src, size_t n);
 void *ft_memccpy(void *dest, const void *src, int c, size_t n);
 void *ft_memmove(void *dest, const void *src, size_t len);
+void *ft_memchr(const void *s, int c, size_t n);
 int ft_strlen(char *str);
 int ft_isalpha(int c);
 int ft_isdigit(int c);
@@ -29,9 +30,64 @@ int main(int ac, char **av)
 	int succes;
 	int failure;
 	char *chars;
+	char *ptn_expected;
+	char *ptn_result;
 
 	(void)ac;
 	(void)av;
+
+	// -----------------------FT_MEMCHR--------------------------
+
+	printf("\nTests for ft_memchr\n");
+
+	succes = 0;
+	failure = 0;
+
+	ptn_expected = memchr("Nothing", '\n', 9);
+	ptn_result = ft_memchr("Nothing", '\n', 9);
+	if ( ptn_expected == ptn_result )
+	{
+		succes++;
+		//printf("\033[1;32m");
+		//printf("0K! with size = %d for string = \"J'ai un tab \"\t\" de 21\"\n\n", my_char);
+		//printf("Expected = %s\n", str_expected);
+		//printf("Got = %s\n\n",  str_result);
+		//printf("\033[0m");
+	}
+	else
+	{
+		failure++;
+		printf("--------------\n");
+		printf("\033[0;31mKO! looking for \"\\n\" in string = \"Nothing\" up to 9\n\n");
+		printf("\033[1;32mExpected = %p\n", ptn_expected);
+		printf("\033[0;31mGot = %p\n\n", ptn_result);
+	}
+	for(my_char = 0; my_char < 6; my_char++)
+	{
+		char src[6] = "Tes\n34";
+
+		ptn_expected = memchr(src, '\n', my_char);
+		ptn_result = ft_memchr(src, '\n', my_char);
+		if ( ptn_expected == ptn_result )
+		{
+			succes++;
+			//printf("\033[1;32m");
+			//printf("0K! with size = %d for string = \"J'ai un tab \"\t\" de 21\"\n\n", my_char);
+			//printf("Expected = %s\n", str_expected);
+			//printf("Got = %s\n\n",  str_result);
+			//printf("\033[0m");
+		}
+		else
+		{
+			failure++;
+			printf("--------------\n");
+			printf("\033[0;31mKO! looking for \"\\n\" in string = \"%s\" up to %d\n\n", src, my_char);
+			printf("\033[1;32mExpected = %p\n", ptn_expected);
+			printf("\033[0;31mGot = %p\n\n", ptn_result);
+			printf("\033[0m");
+		}
+	}
+	printf("\t%d success out of %d tests\n", succes, (succes + failure));
 
 	// -----------------------FT_MEMMOVE--------------------------
 
@@ -61,8 +117,6 @@ int main(int ac, char **av)
 
 	printf("\nTests for ft_memccpy\n");
 
-	char *ptn_expected;
-	char *ptn_result;
 	succes = 0;
 	failure = 0;
 
