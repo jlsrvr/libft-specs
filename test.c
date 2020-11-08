@@ -13,6 +13,7 @@ void *ft_memchr(const void *s, int c, size_t n);
 int ft_memcmp(const void *s1, const void *s2, size_t n);
 char *ft_strchr(const char *s, int c);
 char *ft_strrchr(const char *s, int c);
+int ft_strncmp(const void *s1, const void *s2, size_t n);
 int ft_strlen(char *str);
 int ft_isalpha(int c);
 int ft_isdigit(int c);
@@ -34,11 +35,64 @@ int main(int ac, char **av)
 	int result;
 	int succes;
 	int failure;
+	int counter;
 	char *ptn_expected;
 	char *ptn_result;
 
 	(void)ac;
 	(void)av;
+
+	// -----------------------FT_STRNCMP--------------------------
+
+	printf("\nTests for ft_strncmp\n");
+
+	succes = 0;
+	failure = 0;
+
+	expected = strncmp("a string", "whatever", 0);
+	result = ft_strncmp("a string", "whatever", 0);
+	if ( expected == result )
+		succes++;
+	else
+	{
+		failure++;
+		printf("--------------\n");
+		printf("\033[0;31mKO! comparing for \"a string\" with \"whatever\" up to 0\n\n");
+		printf("\033[1;32mExpected = %d\n", expected);
+		printf("\033[0;31mGot = %d\n\n", result);
+		printf("\033[0m");
+	}
+
+	for(my_char = 0; my_char < 6; my_char++)
+	{
+		for(counter = 0; counter < 6; counter++)
+		{
+			char strs[6][10] = {"Tes\n34", " ", "tes", "123456789", ""};
+			strs[5][0] = -12;
+
+			expected = strncmp(strs[my_char], strs[my_char - counter], 15);
+			result = ft_strncmp(strs[my_char], strs[my_char - counter], 15);
+			if ( expected == result )
+			{
+				succes++;
+				//printf("\033[1;32m");
+				//printf("0K! with size = %d for string = \"J'ai un tab \"\t\" de 21\"\n\n", my_char);
+				//printf("Expected = %s\n", str_expected);
+				//printf("Got = %s\n\n",  str_result);
+				//printf("\033[0m");
+			}
+			else
+			{
+				failure++;
+				printf("--------------\n");
+				printf("\033[0;31mKO! comparing for \"%s\" with \"%s\" up to 15\n\n", strs[my_char], strs[my_char - counter]);
+				printf("\033[1;32mExpected = %d\n", expected);
+				printf("\033[0;31mGot = %d\n\n", result);
+				printf("\033[0m");
+			}
+		}
+	}
+	printf("\t%d success out of %d tests\n", succes, (succes + failure));
 
 	// -----------------------FT_STRRCHR--------------------------
 
@@ -144,7 +198,6 @@ int main(int ac, char **av)
 
 	printf("\nTests for ft_memcmp\n");
 
-	int counter;
 	succes = 0;
 	failure = 0;
 
