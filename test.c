@@ -11,6 +11,7 @@ void *ft_memccpy(void *dest, const void *src, int c, size_t n);
 void *ft_memmove(void *dest, const void *src, size_t len);
 void *ft_memchr(const void *s, int c, size_t n);
 int ft_memcmp(const void *s1, const void *s2, size_t n);
+char *ft_strchr(const char *s, int c);
 int ft_strlen(char *str);
 int ft_isalpha(int c);
 int ft_isdigit(int c);
@@ -37,6 +38,56 @@ int main(int ac, char **av)
 
 	(void)ac;
 	(void)av;
+
+	// -----------------------FT_STRCHR--------------------------
+
+	printf("\nTests for ft_strchr\n");
+
+	succes = 0;
+	failure = 0;
+	char strchar[19] = "aAbBcCdD ZzXxYy\t%|";
+
+		ptn_expected = strchr(strchar, '\0');
+		ptn_result = ft_strchr(strchar, '\0');
+		if (ptn_expected == ptn_result)
+		{
+			succes++;
+			//printf("\033[1;32m");
+			//printf("OK for char = \"%c\"\n", my_char);
+			//printf("\033[0m");
+		}
+		else
+		{
+			failure++;
+			printf("--------------\n");
+			printf("\033[0;31mKO! for ascii char = \"\\0\" in \"%s\" \n\n", strchar);
+			printf("\033[1;32mExpected = %p\n", ptn_expected);
+			printf("\033[0;31mGot = %p\n\n",  ptn_result);
+			printf("\033[0m");
+		}
+
+	for(my_char = 0; my_char < 135; my_char++)
+	{
+		ptn_expected = strchr(strchar, my_char);
+		ptn_result = ft_strchr(strchar, my_char);
+		if (ptn_expected == ptn_result)
+		{
+			succes++;
+			//printf("\033[1;32m");
+			//printf("OK for char = \"%c\"\n", my_char);
+			//printf("\033[0m");
+		}
+		else
+		{
+			failure++;
+			printf("--------------\n");
+			printf("\033[0;31mKO! for ascii char = \"%c\" in \"%s\" \n\n", my_char, strchar);
+			printf("\033[1;32mExpected = %p\n", ptn_expected);
+			printf("\033[0;31mGot = %p\n\n",  ptn_result);
+			printf("\033[0m");
+		}
+	}
+	printf("\t%d success out of %d tests\n", succes, (succes + failure));
 
 	// -----------------------FT_MEMCMP--------------------------
 
