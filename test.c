@@ -14,6 +14,7 @@ int ft_memcmp(const void *s1, const void *s2, size_t n);
 char *ft_strchr(const char *s, int c);
 char *ft_strrchr(const char *s, int c);
 int ft_strncmp(const void *s1, const void *s2, size_t n);
+size_t ft_strlcpy(char * restrict dst, const char * restrict src, size_t dstsize);
 int ft_strlen(char *str);
 int ft_isalpha(int c);
 int ft_isdigit(int c);
@@ -41,6 +42,40 @@ int main(int ac, char **av)
 
 	(void)ac;
 	(void)av;
+
+	// -----------------------FT_STRLCPY--------------------------
+
+	printf("\nTests for ft_strlcpy\n");
+
+	succes = 0;
+	failure = 0;
+
+	for(my_char = 0; my_char < 10; my_char++)
+	{
+		char *src = "MagiquE";
+		char expected_dst[10] = "bS";
+		char result_dst[10] = "bS";
+
+		expected = (int)strlcpy(expected_dst, src, (size_t)my_char);
+		result = (int)ft_strlcpy(result_dst, src, (size_t)my_char);
+		if ((expected == result) && !strcmp(expected_dst, result_dst))
+		{
+			succes++;
+			//printf("\033[1;32m");
+			//printf("OK for char = \"%c\"\n", my_char);
+			//printf("\033[0m");
+		}
+		else
+		{
+			failure++;
+			printf("--------------\n");
+			printf("\033[0;31mKO! for dstsize = \"%d\"\n\n", my_char);
+			printf("\033[1;32mExpected = %d with \"%s\"\n", expected, expected_dst);
+			printf("\033[0;31mGot = %d with \"%s\"\n\n",  result, result_dst);
+			printf("\033[0m");
+		}
+	}
+	printf("\t%d success out of %d tests\n", succes, (succes + failure));
 
 	// -----------------------FT_STRNCMP--------------------------
 
