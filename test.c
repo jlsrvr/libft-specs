@@ -17,6 +17,7 @@ int ft_strncmp(const void *s1, const void *s2, size_t n);
 size_t ft_strlcpy(char * restrict dst, const char * restrict src, size_t dstsize);
 size_t ft_strlcat(char * restrict dst, const char * restrict src, size_t dstsize);
 char *ft_strnstr(const char *haystack, const char *needle, size_t len);
+int ft_atoi(const char *str);
 int ft_strlen(char *str);
 int ft_isalpha(int c);
 int ft_isdigit(int c);
@@ -44,6 +45,37 @@ int main(int ac, char **av)
 
 	(void)ac;
 	(void)av;
+
+	// -----------------------FT_ATOI--------------------------
+
+	printf("\nTests for ft_atoi\n");
+
+	char *intstrs[10] = {"0", "-2147483648", "2147483647", "1234ab567", " -1234 567", " \n\t1234ab567", " --+1234567", "&1234ab567", 0};
+	succes = 0;
+	failure = 0;
+
+	for(my_char = 0; intstrs[my_char]; my_char++)
+	{
+		expected = atoi(intstrs[my_char]);
+		result = ft_atoi(intstrs[my_char]);
+		if (expected == result)
+		{
+			succes++;
+			/*printf("OK! for string = \"%s\"\n\n", intstrs[my_char]);
+			printf("\033[0;32mGot = %d\n\n",  result);
+			printf("\033[0m");*/
+		}
+		else
+		{
+			failure++;
+			printf("--------------\n");
+			printf("\033[0;31mKO! for string = \"%s\"\n\n", intstrs[my_char]);
+			printf("\033[1;32mExpected = %d\n",  expected);
+			printf("\033[0;31mGot = %d\n\n",  result);
+			printf("\033[0m");
+		}
+	}
+	printf("\t%d success out of %d tests\n", succes, (succes + failure));
 
 	// -----------------------FT_STRNSTR--------------------------
 
