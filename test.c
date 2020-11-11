@@ -16,6 +16,7 @@ char *ft_strrchr(const char *s, int c);
 int ft_strncmp(const void *s1, const void *s2, size_t n);
 size_t ft_strlcpy(char * restrict dst, const char * restrict src, size_t dstsize);
 size_t ft_strlcat(char * restrict dst, const char * restrict src, size_t dstsize);
+char *ft_strnstr(const char *haystack, const char *needle, size_t len);
 int ft_strlen(char *str);
 int ft_isalpha(int c);
 int ft_isdigit(int c);
@@ -44,6 +45,52 @@ int main(int ac, char **av)
 	(void)ac;
 	(void)av;
 
+	// -----------------------FT_STRNSTR--------------------------
+
+	printf("\nTests for ft_strnstr\n");
+
+	char *haystack = "bonjojour";
+	char *needle = "on ";
+	char *needle2 = "jour";
+	char *needle3 = "\0";
+	char *needle4 = "uri";
+	char *needle5 = "bon";
+	char *needle7 = "Bon";
+	char *needle6 = "ro";
+	char *needle8 = "joj";
+	char *needle9 = "bonjour";
+	char *str12 = "Hello wwworld";
+	char *o_find1 = "wworld";
+	char *str21 = "FooBarBaz";
+	char *o_find2 = "Baz";
+	char *testn = "tetehelllotetahelloteshellotstetstesthello";
+	char *needletestn = "test";
+	char needleweird[2];
+	needleweird[0] = -1;
+	needleweird[1] = 0;
+	char tofindweird[2];
+	tofindweird[0] = 43;
+	tofindweird[1] = 0;
+
+	printf("%s == %s\n", ft_strnstr(needleweird, tofindweird, 15),  strnstr(needleweird, tofindweird, 15));
+	printf("%s == %s\n", ft_strnstr(haystack, needle, 15),  strnstr(haystack, needle, 15));
+	printf("%s == %s\n", ft_strnstr(str12, o_find1, 15),  strnstr(str12, o_find1, 15));
+	printf("%s == %s\n", ft_strnstr(str21, o_find2, 15),  strnstr(str21, o_find2, 15));
+	printf("%s == %s\n", ft_strnstr(haystack, needle, 15),  strnstr(haystack, needle, 15));
+	printf("%s == %s\n", ft_strnstr(haystack, needle2, 15),  strnstr(haystack, needle2, 15));
+	printf("%s == %s\n", ft_strnstr(haystack, needle3, 15),  strnstr(haystack, needle3, 15));
+	printf("%s == %s\n", ft_strnstr(haystack, needle4, 15),  strnstr(haystack, needle4, 15));
+	printf("%s == %s\n", ft_strnstr(haystack, needle5, 15),  strnstr(haystack, needle5, 15));
+	printf("%s == %s\n", ft_strnstr(haystack, needle6, 15),  strnstr(haystack, needle6, 15));
+	printf("%s == %s\n", ft_strnstr(haystack, needle7, 15),  strnstr(haystack, needle7, 15));
+	printf("%s == %s\n", ft_strnstr(haystack, needle8, 15),  strnstr(haystack, needle8, 15));
+	printf("%s == %s\n", ft_strnstr(haystack, needle9, 10),  strnstr(haystack, needle9, 10));
+	printf("%s == %s\n", ft_strnstr(needle3, needle4, 15),  strnstr(needle3, needle4, 15));
+	printf("%s == %s\n", ft_strnstr(needle3, needle3, 15),  strnstr(needle3, needle3, 15));
+	printf("%s == %s\n", ft_strnstr(testn, needletestn, 15),  strnstr(testn, needletestn, 15));
+	printf("%s == %s\n", ft_strnstr(haystack, haystack, 15),  strnstr(haystack, haystack, 15));
+
+
 	// -----------------------FT_STRLCAT--------------------------
 
 	printf("\nTests for ft_strlcat\n");
@@ -63,9 +110,9 @@ int main(int ac, char **av)
 		{
 			succes++;
 			/*printf("\033[0;31mKO! for dstsize = \"%d\"\n\n", my_char);
-			printf("\033[1;32mExpected = %d with \"%s\"\n", expected, expected_dst);
-			printf("\033[0;31mGot = %d with \"%s\"\n\n",  result, result_dst);
-			printf("\033[0m");*/
+				printf("\033[1;32mExpected = %d with \"%s\"\n", expected, expected_dst);
+				printf("\033[0;31mGot = %d with \"%s\"\n\n",  result, result_dst);
+				printf("\033[0m");*/
 		}
 		else
 		{
@@ -173,24 +220,24 @@ int main(int ac, char **av)
 	failure = 0;
 	char strrchar[38] = "aAbBcCdD ZzXxYy\t%|aAbBcCdD ZzXxYy\t%|";
 
-		ptn_expected = strrchr(strrchar, '\0');
-		ptn_result = ft_strrchr(strrchar, '\0');
-		if (ptn_expected == ptn_result)
-		{
-			succes++;
-			//printf("\033[1;32m");
-			//printf("OK for char = \"%c\"\n", my_char);
-			//printf("\033[0m");
-		}
-		else
-		{
-			failure++;
-			printf("--------------\n");
-			printf("\033[0;31mKO! for ascii char = \"\\0\" in \"%s\" \n\n", strrchar);
-			printf("\033[1;32mExpected = %p\n", ptn_expected);
-			printf("\033[0;31mGot = %p\n\n",  ptn_result);
-			printf("\033[0m");
-		}
+	ptn_expected = strrchr(strrchar, '\0');
+	ptn_result = ft_strrchr(strrchar, '\0');
+	if (ptn_expected == ptn_result)
+	{
+		succes++;
+		//printf("\033[1;32m");
+		//printf("OK for char = \"%c\"\n", my_char);
+		//printf("\033[0m");
+	}
+	else
+	{
+		failure++;
+		printf("--------------\n");
+		printf("\033[0;31mKO! for ascii char = \"\\0\" in \"%s\" \n\n", strrchar);
+		printf("\033[1;32mExpected = %p\n", ptn_expected);
+		printf("\033[0;31mGot = %p\n\n",  ptn_result);
+		printf("\033[0m");
+	}
 
 	for(my_char = 0; my_char < 135; my_char++)
 	{
@@ -223,24 +270,24 @@ int main(int ac, char **av)
 	failure = 0;
 	char strchar[19] = "aAbBcCdD ZzXxYy\t%|";
 
-		ptn_expected = strchr(strchar, '\0');
-		ptn_result = ft_strchr(strchar, '\0');
-		if (ptn_expected == ptn_result)
-		{
-			succes++;
-			//printf("\033[1;32m");
-			//printf("OK for char = \"%c\"\n", my_char);
-			//printf("\033[0m");
-		}
-		else
-		{
-			failure++;
-			printf("--------------\n");
-			printf("\033[0;31mKO! for ascii char = \"\\0\" in \"%s\" \n\n", strchar);
-			printf("\033[1;32mExpected = %p\n", ptn_expected);
-			printf("\033[0;31mGot = %p\n\n",  ptn_result);
-			printf("\033[0m");
-		}
+	ptn_expected = strchr(strchar, '\0');
+	ptn_result = ft_strchr(strchar, '\0');
+	if (ptn_expected == ptn_result)
+	{
+		succes++;
+		//printf("\033[1;32m");
+		//printf("OK for char = \"%c\"\n", my_char);
+		//printf("\033[0m");
+	}
+	else
+	{
+		failure++;
+		printf("--------------\n");
+		printf("\033[0;31mKO! for ascii char = \"\\0\" in \"%s\" \n\n", strchar);
+		printf("\033[1;32mExpected = %p\n", ptn_expected);
+		printf("\033[0;31mGot = %p\n\n",  ptn_result);
+		printf("\033[0m");
+	}
 
 	for(my_char = 0; my_char < 135; my_char++)
 	{
