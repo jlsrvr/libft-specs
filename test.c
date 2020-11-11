@@ -18,6 +18,7 @@ size_t ft_strlcpy(char * restrict dst, const char * restrict src, size_t dstsize
 size_t ft_strlcat(char * restrict dst, const char * restrict src, size_t dstsize);
 char *ft_strnstr(const char *haystack, const char *needle, size_t len);
 int ft_atoi(const char *str);
+char	*ft_strdup(const char *src);
 int ft_strlen(char *str);
 int ft_isalpha(int c);
 int ft_isdigit(int c);
@@ -46,6 +47,38 @@ int main(int ac, char **av)
 	(void)ac;
 	(void)av;
 
+	// -----------------------FT_STRDUP--------------------------
+
+	printf("\nTests for ft_strdup\n");
+
+	char strssrc[5][15] = {"Jean", "", " ", "adore vraiment", "\n"} ;
+	succes = 0;
+	failure = 0;
+
+	for(my_char = 0; my_char < 5; my_char++)
+	{
+		ptn_expected = strdup(strssrc[my_char]);
+		ptn_result = ft_strdup(strssrc[my_char]);
+		if ((ft_strlen(ptn_expected) == ft_strlen(ptn_result)) && !ft_strncmp(ptn_expected, ptn_result, 15))
+		{
+			succes++;
+			//printf("\033[1;32m");
+			//printf("OK for string = \"%s\"\n", strssrc[my_char]);
+			//printf("\033[0m");
+		}
+		else
+		{
+			failure++;
+			printf("--------------\n");
+			printf("\033[0;31mKO! for string = \"%s\"\n\n", strssrc[my_char]);
+			printf("\033[1;32mExpected = %s\n",  ptn_expected);
+			printf("\033[0;31mGot = %s\n\n",  ptn_result);
+			printf("\033[0m");
+		}
+		free(ptn_expected);
+		free(ptn_result);
+	}
+	printf("\t%d success out of %d tests\n", succes, (succes + failure));
 	// -----------------------FT_ATOI--------------------------
 
 	printf("\nTests for ft_atoi\n");
