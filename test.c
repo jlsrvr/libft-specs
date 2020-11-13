@@ -50,6 +50,19 @@ int main(int ac, char **av)
 	(void)ac;
 	(void)av;
 
+	// -----------------------FT_CALLOC--------------------------
+
+	printf("\nTests for ft_strdup\n");
+	succes = 0;
+	failure = 0;
+
+	test_calloc(0, 2, &succes, &failure);
+	test_calloc(1, 0, &succes, &failure);
+	test_calloc(0, 0, &succes, &failure);
+	test_calloc(19, 19, &succes, &failure);
+
+	printf("\t%d success out of %d tests\n", succes, (succes + failure));
+
 	// -----------------------FT_STRDUP--------------------------
 
 	printf("\nTests for ft_strdup\n");
@@ -887,4 +900,29 @@ void test_ascii_change(int (*og)(int), int (*ft)(int))
 		}
 	}
 	printf("\t%d success out of %d tests\n", succes, (succes + failure));
+}
+
+void test_calloc(size_t count, size_t size, int *succes, int *failure)
+{
+	void *ptn_expected = calloc(size, count);
+	void *ptn_result = ft_calloc(size, count);
+	if (((ptn_expected && ptn_result) || (ptn_result == ptn_expected)) && (malloc_size(ptn_expected) == malloc_size(ptn_result)))
+	{
+		(*succes)++;
+		/*printf("OK! for count = %zu and size %zu\n\n", count, size);
+		printf("\033[1;32mExpected = \"%zu\"\n", malloc_size(ptn_expected));
+		printf("Got = \"%zu\"\n\n",  malloc_size(ptn_result));
+		printf("\033[0m");*/
+	}
+	else
+	{
+		(*failure)++;
+		printf("--------------\n");
+		printf("\033[0;31mKO! for size = %zu and count %zu\n\n", size, count);
+		printf("\033[1;32mExpected = \"%s\"\n",  ptn_expected);
+		printf("\033[0;31mGot = \"%s\"\n\n",  ptn_result);
+		printf("\033[0m");
+	}
+	free(ptn_expected);
+	free(ptn_result);
 }
