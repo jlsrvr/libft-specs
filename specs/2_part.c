@@ -1,6 +1,7 @@
 #include <stdio.h>
 
 void specs_ft_substr(int *succes, int*failure);
+void specs_ft_strjoin(int *succes, int*failure);
 int		succes;
 int		failure;
 
@@ -22,5 +23,10 @@ void spec_second_part(void)
 
 	printf("\nTests for ft_substr\n");
 	specs_ft_substr(&succes, &failure);
+	print_results(succes, failure);
+
+	reset_counters(&succes, &failure);
+	printf("\nTests for ft_strjoin\n");
+	specs_ft_strjoin(&succes, &failure);
 	print_results(succes, failure);
 }
