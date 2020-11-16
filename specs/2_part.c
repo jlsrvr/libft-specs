@@ -2,6 +2,7 @@
 
 void specs_ft_substr(int *succes, int*failure);
 void specs_ft_strjoin(int *succes, int*failure);
+void specs_ft_strtrim(int *succes, int*failure);
 int		succes;
 int		failure;
 
@@ -28,5 +29,10 @@ void spec_second_part(void)
 	reset_counters(&succes, &failure);
 	printf("\nTests for ft_strjoin\n");
 	specs_ft_strjoin(&succes, &failure);
+	print_results(succes, failure);
+
+	reset_counters(&succes, &failure);
+	printf("\nTests for ft_strtrim\n");
+	specs_ft_strtrim(&succes, &failure);
 	print_results(succes, failure);
 }
