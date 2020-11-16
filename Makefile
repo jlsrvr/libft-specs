@@ -8,12 +8,12 @@ CC								=	gcc
 
 OBJS							=	${SRCS:.c=.o}
 
-OBJS_TESTS				=	${SRCS_TESTS:.c=.o}
+OBJS_TEST					=	${SRCS_TEST:.c=.o}
 
 SRCS							= $(wildcard ft_*.c)
 
-SRCS_TESTS 				=	${SRCS} \
-										test.c
+SRCS_TEST 				=	$(wildcard specs/*.c)	\
+										specs_runner.c
 
 RM								=	rm -f
 
@@ -25,16 +25,16 @@ FLAGS							=	-Wall -Wextra -Werror
 ${NAME}:	${OBJS}
 					ar rcs ${NAME} ${OBJS}
 
-${TESTS}:	${OBJS_TESTS}
-					${CC} -o ${TESTS} ${OBJS_TESTS}
+${TEST}: 	${NAME} ${OBJS_TEST}
+					${CC} -o ${TEST} ${OBJS_TEST} -L. -lft
 
 all:			${NAME}
 
 clean_t:
-					${RM} ${OBJS_TESTS}
+					${RM} ${OBJS_TEST} ${OBJS}
 
 fclean_t: clean_t
-					${RM} ${TESTS}
+					${RM} ${TEST} ${NAME}
 
 clean:
 					${RM} ${OBJS}
