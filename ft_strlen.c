@@ -6,9 +6,11 @@
 /*   By: jrivoire <jrivoire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 17:23:16 by jrivoire          #+#    #+#             */
-/*   Updated: 2020/11/19 17:30:58 by jrivoire         ###   ########.fr       */
+/*   Updated: 2020/11/19 17:41:03 by jrivoire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 size_t	ft_strlen(char const *str)
 {
