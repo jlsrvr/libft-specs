@@ -1,22 +1,34 @@
-//HEADER
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jrivoire <jrivoire@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/19 18:00:08 by jrivoire          #+#    #+#             */
+/*   Updated: 2020/11/19 18:30:35 by jrivoire         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
-char *ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	(void)s;
-	(void)start;
-	char *dest;
-	size_t index;
+	char			*dest;
+	size_t		index;
 
-	if(!(dest = malloc(sizeof(*dest) * (len + 1))))
+	if (!s)
+		return (NULL);
+	if ((size_t)start > ft_strlen(s))
+		return (ft_strdup(""));
+	if (!(dest = malloc(sizeof(*dest) * (len + 1))))
 		return (NULL);
 	index = 0;
 	while (s[index + start] && (len != index))
-		{
-			dest[index] = s[index + start];
-			index++;
-		}
+	{
+		dest[index] = s[index + start];
+		index++;
+	}
 	dest[index] = 0;
 	return (dest);
 }
