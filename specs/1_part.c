@@ -755,7 +755,7 @@ void spec_first_part(void)
 	{
 		expected = strlen(strs[my_char]);
 		result = ft_strlen(strs[my_char]);
-		if ((expected && result) || (!expected && !result))
+		if (expected == result)
 		{
 			succes++;
 			//printf("\033[1;32m");
@@ -772,6 +772,24 @@ void spec_first_part(void)
 			printf("\033[0m");
 		}
 	}
+		expected = 0; // no defined behaviour in this case for the actual strlen
+		result = ft_strlen(NULL);
+		if (expected == result)
+		{
+			succes++;
+			//printf("\033[1;32m");
+			//printf("OK for string = \"%s\"\n", strs[my_char]);
+			//printf("\033[0m");
+		}
+		else
+		{
+			failure++;
+			printf("--------------\n");
+			printf("\033[0;31mKO! for string = \"%s\"\n\n", NULL);
+			printf("\033[1;32mExpected = %d\n",  expected);
+			printf("\033[0;31mGot = %d\n\n",  result);
+			printf("\033[0m");
+		}
 	printf("\t%d success out of %d tests\n", succes, (succes + failure));
 }
 
