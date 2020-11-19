@@ -1,13 +1,13 @@
 #include "../libft.h"
 #include <stdio.h>
 
-void display_r(char *s1, char *s2, char *result, int expected_len, int succes)
+void display_r(char *s1, char *s2, char *result, size_t expected_len, int succes)
 {
 	printf("--------------\n");
 	(succes) ? printf("\033[0;32mOK!\n") : printf("\033[0;31mKO!\n");
 	printf("First = \"%s\"\nSecond = \"%s\"\n", s1, s2);
 	printf("Result = \"%s\"\n", result);
-	printf("length s1 + s2 = %d length of new %d\n", expected_len, ft_strlen(result));
+	printf("length s1 + s2 = %zu length of new %zu\n", expected_len, ft_strlen(result));
 	printf("\033[0m");
 }
 
@@ -28,7 +28,7 @@ void specs_ft_strjoin(int *succes, int *failure)
 	int index2;
 	char *s1;
 	char *s2;
-	int expected_len;
+	size_t expected_len;
 	char strs[4][14] = {"adore vraiment", "", " ", "\n"} ;
 	char *ptn_result;
 	for(index1 = 0; index1 < 4; index1++)
