@@ -6,7 +6,7 @@
 /*   By: jrivoire <jrivoire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 18:26:22 by jrivoire          #+#    #+#             */
-/*   Updated: 2020/11/20 00:02:08 by jrivoire         ###   ########.fr       */
+/*   Updated: 2020/11/26 16:32:09 by jrivoire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ char		*ft_strnstr(const char *haystack, const char *needle, size_t len);
 char		*ft_strtrim(char const *s1, char const *set);
 char		*ft_strrchr(const char *s, int c);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
+
+char		**ft_split(char const *s, char c);
 
 int			ft_atoi(const char *str);
 int			ft_isalnum(int c);
