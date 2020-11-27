@@ -4,6 +4,8 @@ void specs_ft_substr(int *succes, int*failure);
 void specs_ft_strjoin(int *succes, int*failure);
 void specs_ft_strtrim(int *succes, int*failure);
 void specs_ft_split(int *succes, int*failure);
+void specs_ft_itoa(int *succes, int*failure);
+
 int		succes;
 int		failure;
 
@@ -40,5 +42,10 @@ void spec_second_part(void)
 	reset_counters(&succes, &failure);
 	printf("\nTests for ft_split\n");
 	specs_ft_split(&succes, &failure);
+	print_results(succes, failure);
+
+	reset_counters(&succes, &failure);
+	printf("\nTests for ft_itoa\n");
+	specs_ft_itoa(&succes, &failure);
 	print_results(succes, failure);
 }
