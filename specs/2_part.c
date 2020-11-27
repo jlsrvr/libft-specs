@@ -5,6 +5,7 @@ void specs_ft_strjoin(int *success, int *failure);
 void specs_ft_strtrim(int *success, int *failure);
 void specs_ft_split(int *success, int *failure);
 void specs_ft_itoa(int *success, int *failure);
+void specs_ft_strmapi(int *success, int *failure);
 
 int		success;
 int		failure;
@@ -22,7 +23,7 @@ void print_results(int success, int failure)
 
 void spec_second_part(void)
 {
-	void (*specs[6])(int*, int*);
+	void (*specs[7])(int*, int*);
 	int selected;
 
 	success = 0;
@@ -33,7 +34,8 @@ void spec_second_part(void)
 	specs[2] = specs_ft_strtrim;
 	specs[3] = specs_ft_split;
 	specs[4] = specs_ft_itoa;
-	specs[5] = 0;
+	specs[5] = specs_ft_strmapi;
+	specs[6] = 0;
 
 	for (selected = 0; specs[selected]; selected++)
 	{
