@@ -6,7 +6,7 @@
 /*   By: jrivoire <jrivoire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 18:26:22 by jrivoire          #+#    #+#             */
-/*   Updated: 2020/11/26 16:32:09 by jrivoire         ###   ########.fr       */
+/*   Updated: 2020/11/27 11:34:44 by jrivoire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdlib.h>
 
+char		*ft_itoa(int n);
 char		*ft_strchr(const char *s, int c);
 char		*ft_strdup(const char *src);
 char		*ft_strjoin(char const *s1, char const *s2);
