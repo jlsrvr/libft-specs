@@ -1,51 +1,44 @@
 #include <stdio.h>
 
-void specs_ft_substr(int *succes, int*failure);
-void specs_ft_strjoin(int *succes, int*failure);
-void specs_ft_strtrim(int *succes, int*failure);
-void specs_ft_split(int *succes, int*failure);
-void specs_ft_itoa(int *succes, int*failure);
+void specs_ft_substr(int *success, int *failure);
+void specs_ft_strjoin(int *success, int *failure);
+void specs_ft_strtrim(int *success, int *failure);
+void specs_ft_split(int *success, int *failure);
+void specs_ft_itoa(int *success, int *failure);
 
-int		succes;
+int		success;
 int		failure;
 
-void	reset_counters(int *succes, int *failure)
+void	reset_counters(int *success, int *failure)
 {
-	*succes = 0;
+	*success = 0;
 	*failure = 0;
 }
 
-void print_results(int succes, int failure)
+void print_results(int success, int failure)
 {
-	printf("\t%d success out of %d tests\n", succes, (succes + failure));
+	printf("\t%d success out of %d tests\n", success, (success + failure));
 }
 
 void spec_second_part(void)
 {
-	succes = 0;
+	void (*specs[6])(int*, int*);
+	int selected;
+
+	success = 0;
 	failure = 0;
 
-	printf("\nTests for ft_substr\n");
-	specs_ft_substr(&succes, &failure);
-	print_results(succes, failure);
+	specs[0] = specs_ft_substr;
+	specs[1] = specs_ft_strjoin;
+	specs[2] = specs_ft_strtrim;
+	specs[3] = specs_ft_split;
+	specs[4] = specs_ft_itoa;
+	specs[5] = 0;
 
-	reset_counters(&succes, &failure);
-	printf("\nTests for ft_strjoin\n");
-	specs_ft_strjoin(&succes, &failure);
-	print_results(succes, failure);
-
-	reset_counters(&succes, &failure);
-	printf("\nTests for ft_strtrim\n");
-	specs_ft_strtrim(&succes, &failure);
-	print_results(succes, failure);
-
-	reset_counters(&succes, &failure);
-	printf("\nTests for ft_split\n");
-	specs_ft_split(&succes, &failure);
-	print_results(succes, failure);
-
-	reset_counters(&succes, &failure);
-	printf("\nTests for ft_itoa\n");
-	specs_ft_itoa(&succes, &failure);
-	print_results(succes, failure);
+	for (selected = 0; specs[selected]; selected++)
+	{
+		(*specs[selected])(&success, &failure);
+		print_results(success, failure);
+		reset_counters(&success, &failure);
+	}
 }

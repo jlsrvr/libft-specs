@@ -1,11 +1,11 @@
+#include "libft.h"
+
 void spec_first_part(void);
 void spec_second_part(void);
 
-int ft_atoi(char *str);
-void (*parts[3])(void);
-
 int main(int ac, char **av)
 {
+	void (*parts[3])(void);
 	parts[0] = spec_first_part;
 	parts[1] = spec_second_part;
 	parts[2] = 0;

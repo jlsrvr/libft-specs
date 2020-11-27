@@ -22,6 +22,7 @@ static int check_ft_itoa(int n, char *result)
 
 void specs_ft_itoa(int *sucess, int *failure)
 {
+	printf("Tests for %s\n", &__func__[6]);
 	int		index;
 	int		my_int;
 	char	*ptn_result;

@@ -17,6 +17,7 @@ int check_ft_strtrim(char *s1, char *expected)
 
 void specs_ft_strtrim(int *succes, int *failure)
 {
+	printf("Tests for %s\n", &__func__[6]);
 	char *s1;
 	char *set;
 	char strs[5][30] = {"   adore\tvraiment   ", "adore vraiment", "", " ", "\t"} ;

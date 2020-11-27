@@ -15,6 +15,7 @@ void display_result(char *original, char *new, int start, size_t len, int succes
 
 void specs_ft_substr(int *succes, int *failure)
 {
+	printf("Tests for %s\n", &__func__[6]);
 	int start;
 	size_t len;
 	char strs[4][14] = {"adore vraiment", "", " ", "\n"} ;

@@ -75,6 +75,7 @@ static void	free_result(char **result)
 
 void specs_ft_split(int *sucess, int *failure)
 {
+	printf("Tests for %s\n", &__func__[6]);
 	char const *s;
 	char c;
 	char **ptn_result;
