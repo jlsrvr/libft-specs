@@ -6,7 +6,7 @@
 /*   By: jrivoire <jrivoire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 18:26:22 by jrivoire          #+#    #+#             */
-/*   Updated: 2020/11/29 12:31:34 by jrivoire         ###   ########.fr       */
+/*   Updated: 2020/11/29 12:44:03 by jrivoire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void		*ft_memmove(void *dest, const void *src, size_t len);
 void		*ft_memset(void *ptr, int value, size_t num);
 void		ft_putchar_fd(char c, int fd);
 void		ft_putendl_fd(char *str, int fd);
+void		ft_putnbr_fd(int n, int fd);
 void		ft_putstr_fd(char *str, int fd);
 
 #endif
