@@ -9,6 +9,7 @@ void specs_ft_strmapi(int *success, int *failure);
 void specs_ft_putchar_fd(int *success, int *failure);
 void specs_ft_putstr_fd(int *success, int *failure);
 void specs_ft_putendl_fd(int *success, int *failure);
+void specs_ft_putnbr_fd(int *success, int *failure);
 
 int		success;
 int		failure;
@@ -26,7 +27,7 @@ void print_results(int success, int failure)
 
 void spec_second_part(void)
 {
-	void (*specs[10])(int*, int*);
+	void (*specs[11])(int*, int*);
 	int selected;
 
 	success = 0;
@@ -41,7 +42,8 @@ void spec_second_part(void)
 	specs[6] = specs_ft_putchar_fd;
 	specs[7] = specs_ft_putstr_fd;
 	specs[8] = specs_ft_putendl_fd;
-	specs[9] = 0;
+	specs[9] = specs_ft_putnbr_fd;
+	specs[10] = 0;
 
 	for (selected = 0; specs[selected]; selected++)
 	{
