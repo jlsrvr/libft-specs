@@ -1,10 +1,18 @@
-//HEADER
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jrivoire <jrivoire@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/30 21:59:36 by jrivoire          #+#    #+#             */
+/*   Updated: 2020/11/30 22:00:07 by jrivoire         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include <string.h>
+#include "libft.a"
 
-int ft_strlen(char *str);
-
-size_t ft_strlcpy(char *dst, const char *src, size_t dstsize)
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
 	size_t lensrc;
 	size_t index;

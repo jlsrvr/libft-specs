@@ -1,8 +1,18 @@
-//HEADER
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jrivoire <jrivoire@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/30 20:59:31 by jrivoire          #+#    #+#             */
+/*   Updated: 2020/11/30 21:00:21 by jrivoire         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include <string.h>
+#include "libft.h"
 
-int ft_strncmp(const char *s1, const char *s2, size_t n)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
 	size_t index;
 

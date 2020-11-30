@@ -1,6 +1,18 @@
-//HEADER
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jrivoire <jrivoire@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/30 20:49:14 by jrivoire          #+#    #+#             */
+/*   Updated: 2020/11/30 20:52:21 by jrivoire         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int ft_atoi(const char *str)
+#include "libft.h"
+
+int	ft_atoi(const char *str)
 {
 	int	sign;
 	int	result;
@@ -14,7 +26,7 @@ int ft_atoi(const char *str)
 		sign *= -1;
 		str++;
 	}
-	while (*str >= 48 && *str <= 57 && *str)
+	while (ft_isdigit(*str) && *str)
 	{
 		result = result * 10 + (*str - 48);
 		++str;

@@ -1,9 +1,18 @@
-//HEADER
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jrivoire <jrivoire@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/30 20:56:10 by jrivoire          #+#    #+#             */
+/*   Updated: 2020/11/30 20:57:00 by jrivoire         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include <string.h>
-int ft_strlen(char *str);
+#include "libft.h"
 
-size_t ft_strlcat(char *dst, const char *src, size_t dstsize)
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
 	size_t lendst;
 	size_t lensrc;

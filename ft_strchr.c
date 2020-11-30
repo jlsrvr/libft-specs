@@ -1,8 +1,16 @@
-//HEADER
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jrivoire <jrivoire@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/30 21:56:39 by jrivoire          #+#    #+#             */
+/*   Updated: 2020/11/30 21:59:11 by jrivoire         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include <stdio.h>
-
-char *ft_strchr(const char *s, int c)
+char	*ft_strchr(const char *s, int c)
 {
 	while (*s)
 	{
@@ -10,7 +18,7 @@ char *ft_strchr(const char *s, int c)
 			return ((char*)s);
 		s++;
 	}
-		if (*s == c)
-			return ((char*)s);
-	return(NULL);
+	if (*s == c)
+		return ((char*)s);
+	return (NULL);
 }

@@ -1,16 +1,29 @@
-//HEADER
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jrivoire <jrivoire@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/30 22:57:38 by jrivoire          #+#    #+#             */
+/*   Updated: 2020/11/30 23:05:43 by jrivoire         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include <stdio.h>
+#include "libft.h"
 
-void *ft_memchr(const void *str, int c, size_t n)
+void	*ft_memchr(const void *str, int c, size_t n)
 {
-	size_t index;
+	const char	*s;
+	size_t		index;
 
-	index = -1;
-	while (++index < n)
+	s = (const char*)str;
+	index = 0;
+	while (index < n)
 	{
-		if (((char*)str)[index] == c)
-			return (&((char*)str)[index]);
+		if (s[index] == c)
+			return ((void*)(str + index));
+		index++;
 	}
 	return (NULL);
 }

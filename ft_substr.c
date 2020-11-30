@@ -6,7 +6,7 @@
 /*   By: jrivoire <jrivoire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 18:00:08 by jrivoire          #+#    #+#             */
-/*   Updated: 2020/11/19 18:30:35 by jrivoire         ###   ########.fr       */
+/*   Updated: 2020/11/30 21:04:38 by jrivoire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char			*dest;
+	char		*dest;
 	size_t		index;
 
 	if (!s)

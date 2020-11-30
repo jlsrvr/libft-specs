@@ -1,7 +1,18 @@
-//HEADER
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jrivoire <jrivoire@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/30 21:06:10 by jrivoire          #+#    #+#             */
+/*   Updated: 2020/11/30 21:06:52 by jrivoire         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include <string.h>
-void *ft_memset(void *str, int c, size_t len)
+#include "libft.h"
+
+void	*ft_memset(void *str, int c, size_t len)
 {
 	size_t index;
 

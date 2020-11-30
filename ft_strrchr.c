@@ -1,19 +1,27 @@
-//HEADER
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jrivoire <jrivoire@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/30 23:11:49 by jrivoire          #+#    #+#             */
+/*   Updated: 2020/11/30 23:12:00 by jrivoire         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include <stdio.h>
+#include "libft.h"
 
-char *ft_strrchr(const char *s, int c)
+char	*ft_strrchr(const char *s, int c)
 {
-	int index;
+	size_t index;
 
-	index = 0;
-	while (s[index])
-		index++;
-	while (index >= 0)
+	index = ft_strlen((char*)s);
+	while (index > 0)
 	{
 		if (s[index] == c)
-			return (&((char*)s)[index]);
+			return ((char*)(s + index));
 		index--;
 	}
-	return(NULL);
+	return (NULL);
 }
