@@ -1,15 +1,16 @@
 #include "../libft.h"
-#include <stdio.h>
 #include <strings.h>
 #include <ctype.h>
 #include <malloc/malloc.h>
+#include <stdio.h>
 
 char		*write_boolean(int value);
 void		print_null_begun_string(void *str, int size);
 int			comp_null_begun_strings(void *str1, void *str2, int size);
 void		test_ascii_change(int (*og)(int), int (*ft)(int));
-void		test_ascii_type(int (*og)(int), int (*ft)(int));
 void		test_calloc(size_t count, size_t size, int *succes, int *failure);
+void		specs_ascii_verification(void);
+void		specs_ft_strnstr(void);
 
 void spec_first_part(void)
 {
@@ -21,6 +22,17 @@ void spec_first_part(void)
 	int		counter;
 	char	*ptn_expected;
 	char	*ptn_result;
+	void (*specs[3])(void);
+	int selected;
+
+	specs[0] = specs_ascii_verification;
+	specs[1] = specs_ft_strnstr;
+	specs[2] = 0;
+
+	for (selected = 0; specs[selected]; selected++)
+	{
+		(*specs[selected])();
+	}
 
 	// -----------------------FT_CALLOC--------------------------
 
@@ -98,52 +110,6 @@ void spec_first_part(void)
 		}
 	}
 	printf("\t%d success out of %d tests\n", succes, (succes + failure));
-
-	// -----------------------FT_STRNSTR--------------------------
-
-	printf("\nTests for ft_strnstr\n");
-
-	char *haystack = "bonjojour";
-	char *needle = "on ";
-	char *needle2 = "jour";
-	char *needle3 = "\0";
-	char *needle4 = "uri";
-	char *needle5 = "bon";
-	char *needle7 = "Bon";
-	char *needle6 = "ro";
-	char *needle8 = "joj";
-	char *needle9 = "bonjour";
-	char *str12 = "Hello wwworld";
-	char *o_find1 = "wworld";
-	char *str21 = "FooBarBaz";
-	char *o_find2 = "Baz";
-	char *testn = "tetehelllotetahelloteshellotstetstesthello";
-	char *needletestn = "test";
-	char needleweird[2];
-	needleweird[0] = -1;
-	needleweird[1] = 0;
-	char tofindweird[2];
-	tofindweird[0] = 43;
-	tofindweird[1] = 0;
-
-	printf("%s == %s\n", ft_strnstr(needleweird, tofindweird, 15),  strnstr(needleweird, tofindweird, 15));
-	printf("%s == %s\n", ft_strnstr(haystack, needle, 15),  strnstr(haystack, needle, 15));
-	printf("%s == %s\n", ft_strnstr(str12, o_find1, 15),  strnstr(str12, o_find1, 15));
-	printf("%s == %s\n", ft_strnstr(str21, o_find2, 15),  strnstr(str21, o_find2, 15));
-	printf("%s == %s\n", ft_strnstr(haystack, needle, 15),  strnstr(haystack, needle, 15));
-	printf("%s == %s\n", ft_strnstr(haystack, needle2, 15),  strnstr(haystack, needle2, 15));
-	printf("%s == %s\n", ft_strnstr(haystack, needle3, 15),  strnstr(haystack, needle3, 15));
-	printf("%s == %s\n", ft_strnstr(haystack, needle4, 15),  strnstr(haystack, needle4, 15));
-	printf("%s == %s\n", ft_strnstr(haystack, needle5, 15),  strnstr(haystack, needle5, 15));
-	printf("%s == %s\n", ft_strnstr(haystack, needle6, 15),  strnstr(haystack, needle6, 15));
-	printf("%s == %s\n", ft_strnstr(haystack, needle7, 15),  strnstr(haystack, needle7, 15));
-	printf("%s == %s\n", ft_strnstr(haystack, needle8, 15),  strnstr(haystack, needle8, 15));
-	printf("%s == %s\n", ft_strnstr(haystack, needle9, 10),  strnstr(haystack, needle9, 10));
-	printf("%s == %s\n", ft_strnstr(needle3, needle4, 15),  strnstr(needle3, needle4, 15));
-	printf("%s == %s\n", ft_strnstr(needle3, needle3, 15),  strnstr(needle3, needle3, 15));
-	printf("%s == %s\n", ft_strnstr(testn, needletestn, 15),  strnstr(testn, needletestn, 15));
-	printf("%s == %s\n", ft_strnstr(haystack, haystack, 15),  strnstr(haystack, haystack, 15));
-
 
 	// -----------------------FT_STRLCAT--------------------------
 
@@ -718,31 +684,6 @@ void spec_first_part(void)
 	printf("\nTests for ft_toupper\n");
 	test_ascii_change(&toupper, &ft_toupper);
 
-	// -----------------------FT_ISPRINT--------------------------
-
-	printf("\nTests for ft_isprint\n");
-	test_ascii_type(&isprint, &ft_isprint);
-
-	// -----------------------FT_ISASCII--------------------------
-
-	printf("\nTests for ft_isascii\n");
-	test_ascii_type(&isascii, &ft_isascii);
-
-	// -----------------------FT_ISALNUM--------------------------
-
-	printf("\nTests for ft_isalnum\n");
-	test_ascii_type(&isalnum, &ft_isalnum);
-
-	// -----------------------FT_ISDIGIT--------------------------
-
-	printf("\nTests for ft_isdigit\n");
-	test_ascii_type(&isdigit, &ft_isdigit);
-
-	// -----------------------FT_ISALPHA--------------------------
-
-	printf("\nTests for ft_isalpha\n");
-	test_ascii_type(&isalpha, &ft_isalpha);
-
 	// -----------------------FT_STRLEN--------------------------
 
 	printf("\nTests for ft_strlen\n");
@@ -820,40 +761,6 @@ char *write_boolean(int value)
 	if (value == 0)
 		return ("False");
 	return ("True");
-}
-
-void test_ascii_type(int (*og)(int), int (*ft)(int))
-{
-	int my_char;
-	int expected;
-	int result;
-	int succes;
-	int failure;
-
-	succes = 0;
-	failure = 0;
-	for(my_char = 0; my_char < 135; my_char++)
-	{
-		expected = (*og)(my_char);
-		result = (*ft)(my_char);
-		if ((expected && result) || (!expected && !result))
-		{
-			succes++;
-			//printf("\033[1;32m");
-			//printf("OK for char = \"%c\"\n", my_char);
-			//printf("\033[0m");
-		}
-		else
-		{
-			failure++;
-			printf("--------------\n");
-			printf("\033[0;31mKO! for ascii char = \"%d\"\n\n", my_char);
-			printf("\033[1;32mExpected = %s\n", write_boolean(expected));
-			printf("\033[0;31mGot = %s\n\n",  write_boolean(result));
-			printf("\033[0m");
-		}
-	}
-	printf("\t%d success out of %d tests\n", succes, (succes + failure));
 }
 
 void test_ascii_change(int (*og)(int), int (*ft)(int))
