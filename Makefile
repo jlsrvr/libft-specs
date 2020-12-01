@@ -12,8 +12,7 @@ OBJS_TEST					=	${SRCS_TEST:.c=.o}
 
 SRCS							= $(wildcard ft_*.c)
 
-SRCS_TEST 				=	$(wildcard specs/*.c)	\
-										specs_runner.c
+SRCS_TEST 				=	$(wildcard specs/*.c)
 
 RM								=	rm -f
 
