@@ -6,11 +6,11 @@
 /*   By: jrivoire <jrivoire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 21:59:36 by jrivoire          #+#    #+#             */
-/*   Updated: 2020/11/30 22:00:07 by jrivoire         ###   ########.fr       */
+/*   Updated: 2020/12/01 22:58:21 by jrivoire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.a"
+#include "libft.h"
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {

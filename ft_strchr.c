@@ -6,9 +6,11 @@
 /*   By: jrivoire <jrivoire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 21:56:39 by jrivoire          #+#    #+#             */
-/*   Updated: 2020/11/30 21:59:11 by jrivoire         ###   ########.fr       */
+/*   Updated: 2020/12/01 22:57:44 by jrivoire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 char	*ft_strchr(const char *s, int c)
 {
