@@ -11,6 +11,7 @@ void		test_ascii_change(int (*og)(int), int (*ft)(int));
 void		test_calloc(size_t count, size_t size, int *succes, int *failure);
 void		specs_ascii_verification(void);
 void		specs_ft_strnstr(void);
+void		specs_ft_memcpy(void);
 
 void spec_first_part(void)
 {
@@ -22,12 +23,13 @@ void spec_first_part(void)
 	int		counter;
 	char	*ptn_expected;
 	char	*ptn_result;
-	void (*specs[3])(void);
+	void (*specs[4])(void);
 	int selected;
 
 	specs[0] = specs_ascii_verification;
 	specs[1] = specs_ft_strnstr;
-	specs[2] = 0;
+	specs[2] = specs_ft_memcpy;
+	specs[3] = 0;
 
 	for (selected = 0; specs[selected]; selected++)
 	{
@@ -513,88 +515,6 @@ void spec_first_part(void)
 			printf("\033[0;31mKO! for src = \"%s\" with char = n and size = %d\n\n", src2, my_char);
 			printf("\033[1;32mExpected = %s\n",  ptn_expected);
 			printf("\033[0;31mGot = %s\n\n",  ptn_result);
-			printf("\033[0m");
-		}
-	}
-	printf("\t%d success out of %d tests\n", succes, (succes + failure));
-
-	// -----------------------FT_MEMCPY--------------------------
-
-	printf("\nTests for ft_memcpy with numbers\n");
-
-	succes = 0;
-	failure = 0;
-
-
-	for(my_char = 0; my_char < 6; my_char++)
-	{
-
-		int src[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-		int dest_expected[] ={10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
-		int dest_result[] = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
-
-		memcpy(dest_expected, src, my_char);
-		ft_memcpy(dest_result, src,  my_char);
-		if ( comp_null_begun_strings(dest_expected, dest_result, 23) )
-		{
-			succes++;
-			//printf("\033[1;32m");
-			//printf("0K! with size = %d for string = \"J'ai un tab \"\t\" de 21\"\n\n", my_char);
-			//printf("Expected = %s\n", str_expected);
-			//printf("Got = %s\n\n",  str_result);
-			//printf("\033[0m");
-		}
-		else
-		{
-			failure++;
-			printf("--------------\n");
-			printf("\033[0;31mKO! with size = %d for string = \"J'ai un tab \"\t\" de 21\"\n\n", my_char);
-			printf("\033[1;32mExpected =");
-			print_null_begun_string(dest_expected, 23);
-			printf("\n");
-			printf("\033[0;31mGot =");
-			print_null_begun_string(dest_result, 23);
-			printf("\n\n");
-			printf("\033[0m");
-		}
-	}
-	printf("\t%d success out of %d tests\n", succes, (succes + failure));
-
-	// -----------------------FT_MEMCPY--------------------------
-
-	printf("\nTests for ft_memcpy\n");
-
-	succes = 0;
-	failure = 0;
-
-	for(my_char = 0; my_char < 6; my_char++)
-	{
-		char src[5] = "\t%1a";
-		char dest_expected[25] = "J'ai un tab \"\t\" de 21";
-		char dest_result[25] = "J'ai un tab \"\t\" de 21";
-
-		memcpy(dest_expected, src, my_char);
-		ft_memcpy(dest_result, src,  my_char);
-		if ( comp_null_begun_strings(dest_expected, dest_result, 23) )
-		{
-			succes++;
-			//printf("\033[1;32m");
-			//printf("0K! with size = %d for string = \"J'ai un tab \"\t\" de 21\"\n\n", my_char);
-			//printf("Expected = %s\n", str_expected);
-			//printf("Got = %s\n\n",  str_result);
-			//printf("\033[0m");
-		}
-		else
-		{
-			failure++;
-			printf("--------------\n");
-			printf("\033[0;31mKO! with size = %d for string = \"J'ai un tab \"\t\" de 21\"\n\n", my_char);
-			printf("\033[1;32mExpected =");
-			print_null_begun_string(dest_expected, 23);
-			printf("\n");
-			printf("\033[0;31mGot =");
-			print_null_begun_string(dest_result, 23);
-			printf("\n\n");
 			printf("\033[0m");
 		}
 	}
