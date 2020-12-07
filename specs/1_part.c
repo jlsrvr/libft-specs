@@ -12,6 +12,7 @@ void		test_calloc(size_t count, size_t size, int *succes, int *failure);
 void		specs_ascii_verification(void);
 void		specs_ft_strnstr(void);
 void		specs_ft_memcpy(void);
+void		specs_ft_memccpy(void);
 
 void spec_first_part(void)
 {
@@ -23,13 +24,14 @@ void spec_first_part(void)
 	int		counter;
 	char	*ptn_expected;
 	char	*ptn_result;
-	void (*specs[4])(void);
+	void (*specs[5])(void);
 	int selected;
 
 	specs[0] = specs_ascii_verification;
 	specs[1] = specs_ft_strnstr;
 	specs[2] = specs_ft_memcpy;
-	specs[3] = 0;
+	specs[3] = specs_ft_memccpy;
+	specs[4] = 0;
 
 	for (selected = 0; specs[selected]; selected++)
 	{
@@ -460,63 +462,6 @@ void spec_first_part(void)
 		printf("\033[1;32mExpected = %s\n", str);
 		printf("\033[0;31mGot = %s\n\n", str2);
 		printf("\033[0m");
-	}
-	printf("\t%d success out of %d tests\n", succes, (succes + failure));
-
-	// -----------------------FT_MEMCCPY--------------------------
-
-	printf("\nTests for ft_memccpy\n");
-
-	succes = 0;
-	failure = 0;
-
-	for(my_char = 0; my_char < 17; my_char++)
-	{
-		char src[] = "adore\nvra\timent";
-		char dest_expected[25] = "J'ai un tab \"\t\" de 21";
-		char dest_result[25] = "J'ai un tab \"\t\" de 21";
-
-		ptn_expected = memccpy(dest_expected, src,'n', my_char);
-		ptn_result = ft_memccpy(dest_result, src,'n', my_char);
-		if ((ptn_expected == ptn_result) || !strcmp(ptn_expected, ptn_result))
-			//{
-			succes++;
-		//printf("\033[1;32m");
-		//printf("OK for string = \"%s\"\n", strs[my_char]);
-		//printf("\033[0m");
-		//}
-		else
-		{
-			failure++;
-			printf("--------------\n");
-			printf("\033[0;31mKO! for src = \"%s\" with char = n and size = %d\n\n", src, my_char);
-			printf("\033[1;32mExpected = %s\n",  ptn_expected);
-			printf("\033[0;31mGot = %s\n\n",  ptn_result);
-			printf("\033[0m");
-		}
-
-		char src2[] = "adore\nvra\timent";
-		char dest_expected2[20] = "J'ai";
-		char dest_result2[20] = "J'ai";
-
-		ptn_expected = memccpy(dest_expected2, src2,'n', my_char);
-		ptn_result = ft_memccpy(dest_result2, src2,'n', my_char);
-		if ((ptn_expected == ptn_result) || !strcmp(ptn_expected, ptn_result))
-		{
-			succes++;
-			//printf("\033[1;32m");
-			//printf("OK for string = \"%s\"\n", strs[my_char]);
-			//printf("\033[0m");
-		}
-		else
-		{
-			failure++;
-			printf("--------------\n");
-			printf("\033[0;31mKO! for src = \"%s\" with char = n and size = %d\n\n", src2, my_char);
-			printf("\033[1;32mExpected = %s\n",  ptn_expected);
-			printf("\033[0;31mGot = %s\n\n",  ptn_result);
-			printf("\033[0m");
-		}
 	}
 	printf("\t%d success out of %d tests\n", succes, (succes + failure));
 
