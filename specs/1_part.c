@@ -4,7 +4,6 @@
 #include <malloc/malloc.h>
 #include <stdio.h>
 
-char		*write_boolean(int value);
 void		print_null_begun_string(void *str, int size);
 int			comp_null_begun_strings(void *str1, void *str2, int size);
 void		test_ascii_change(int (*og)(int), int (*ft)(int));
@@ -619,13 +618,6 @@ void print_null_begun_string(void *ptr, int size)
 	index = -1;
 	while (++index < size)
 		printf("%c", ((char*)ptr)[index]);
-}
-
-char *write_boolean(int value)
-{
-	if (value == 0)
-		return ("False");
-	return ("True");
 }
 
 void test_ascii_change(int (*og)(int), int (*ft)(int))
