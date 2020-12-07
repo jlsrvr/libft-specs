@@ -99,8 +99,8 @@ void spec_first_part(void)
 		{
 			succes++;
 			/*printf("OK! for string = \"%s\"\n\n", intstrs[my_char]);
-				printf("\033[0;32mGot = %d\n\n",  result);
-				printf("\033[0m");*/
+			  printf("\033[0;32mGot = %d\n\n",  result);
+			  printf("\033[0m");*/
 		}
 		else
 		{
@@ -133,9 +133,9 @@ void spec_first_part(void)
 		{
 			succes++;
 			/*printf("\033[0;31mKO! for dstsize = \"%d\"\n\n", my_char);
-				printf("\033[1;32mExpected = %d with \"%s\"\n", expected, expected_dst);
-				printf("\033[0;31mGot = %d with \"%s\"\n\n",  result, result_dst);
-				printf("\033[0m");*/
+			  printf("\033[1;32mExpected = %d with \"%s\"\n", expected, expected_dst);
+			  printf("\033[0;31mGot = %d with \"%s\"\n\n",  result, result_dst);
+			  printf("\033[0m");*/
 		}
 		else
 		{
@@ -446,21 +446,31 @@ void spec_first_part(void)
 
 	succes = 0;
 	failure = 0;
+	int count;
+	count = 0;
+	size_t len;
 
-	char str[] = "foo-bar";
-	char str2[] = "foo-bar";
-	memmove(&str[3],&str[4],4);
-	ft_memmove(&str2[3],&str2[4],4);
-	if ( !strcmp(str, str2) )
-		succes++;
-	else
+	for(len = 0; len < 7; len++)
 	{
-		failure++;
-		printf("--------------\n");
-		printf("\033[0;31mKO! start with \"foo-bar\"\n");
-		printf("\033[1;32mExpected = %s\n", str);
-		printf("\033[0;31mGot = %s\n\n", str2);
-		printf("\033[0m");
+		char src[8] = "foo-bar";
+		char *dest;
+		char src1[8] = "foo-bar";
+		char *dest1;
+
+		dest = src + 1;
+		dest1 = src1 + 1;
+		memmove(dest1, src1, len);
+		if ((dest == ft_memmove(dest, src, len)) && !strcmp(dest, dest1))
+			succes++;
+		else
+		{
+			failure++;
+			printf("--------------\n");
+			printf("\033[0;31mKO! start with \"foo-bar\"\n");
+			printf("\033[1;32mExpected = %s\n", dest1);
+			printf("\033[0;31mGot = %s\n\n", dest);
+			printf("\033[0m");
+		}
 	}
 	printf("\t%d success out of %d tests\n", succes, (succes + failure));
 
@@ -577,24 +587,24 @@ void spec_first_part(void)
 			printf("\033[0m");
 		}
 	}
-		expected = 0; // no defined behaviour in this case for the actual strlen
-		result = ft_strlen(NULL);
-		if (expected == result)
-		{
-			succes++;
-			//printf("\033[1;32m");
-			//printf("OK for string = \"%s\"\n", strs[my_char]);
-			//printf("\033[0m");
-		}
-		else
-		{
-			failure++;
-			printf("--------------\n");
-			printf("\033[0;31mKO! for string = \"%s\"\n\n", NULL);
-			printf("\033[1;32mExpected = %d\n",  expected);
-			printf("\033[0;31mGot = %d\n\n",  result);
-			printf("\033[0m");
-		}
+	expected = 0; // no defined behaviour in this case for the actual strlen
+	result = ft_strlen(NULL);
+	if (expected == result)
+	{
+		succes++;
+		//printf("\033[1;32m");
+		//printf("OK for string = \"%s\"\n", strs[my_char]);
+		//printf("\033[0m");
+	}
+	else
+	{
+		failure++;
+		printf("--------------\n");
+		printf("\033[0;31mKO! for string = \"%s\"\n\n", NULL);
+		printf("\033[1;32mExpected = %d\n",  expected);
+		printf("\033[0;31mGot = %d\n\n",  result);
+		printf("\033[0m");
+	}
 	printf("\t%d success out of %d tests\n", succes, (succes + failure));
 }
 
@@ -662,9 +672,9 @@ void test_calloc(size_t count, size_t size, int *succes, int *failure)
 	{
 		(*succes)++;
 		/*printf("OK! for count = %zu and size %zu\n\n", count, size);
-		printf("\033[1;32mExpected = \"%zu\"\n", malloc_size(ptn_expected));
-		printf("Got = \"%zu\"\n\n",  malloc_size(ptn_result));
-		printf("\033[0m");*/
+		  printf("\033[1;32mExpected = \"%zu\"\n", malloc_size(ptn_expected));
+		  printf("Got = \"%zu\"\n\n",  malloc_size(ptn_result));
+		  printf("\033[0m");*/
 	}
 	else
 	{
