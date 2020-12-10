@@ -11,23 +11,23 @@ static void display_result(char *expected, char *result, int success)
 	printf("\033[0m");
 }
 
-static int check_ft_strnstr(char *expected, char *got)
+static int check_ft_strnstr(char *expected, char *got, size_t len)
 {
 	if ((!expected && !got) || (!*expected && !*got))
 		return (1);
-	if (ft_strncmp(expected, got, 15) == 0)
+	if (ft_strncmp(expected, got, len) == 0)
 		return (1);
 	return (0);
 }
 
-static void test_ft_strnstr(char *haystack, char *needle, int len, int *success, int *failure)
+static void test_ft_strnstr(char *haystack, char *needle, size_t len, int *success, int *failure)
 {
 	char	*got;
 	char  	*expected;
 
 	got = ft_strnstr(haystack, needle, len);
 	expected = strnstr(haystack, needle, len);
-	if (check_ft_strnstr(expected, got))
+	if (check_ft_strnstr(expected, got, len))
 	{
 		(*success)++;
 		//display_result(expected, got, 1);
@@ -71,6 +71,8 @@ void specs_ft_strnstr(void)
 	char tofindweird[2];
 	tofindweird[0] = 43;
 	tofindweird[1] = 0;
+	char *big = "123456789";
+	char *little = "9";
 
 	test_ft_strnstr(needleweird, tofindweird, 15, &success, &failure);
 	test_ft_strnstr(haystack, needle, 15, &success, &failure);
@@ -89,6 +91,14 @@ void specs_ft_strnstr(void)
 	test_ft_strnstr(needle3, needle3, 15, &success, &failure);
 	test_ft_strnstr(testn, needletestn, 15, &success, &failure);
 	test_ft_strnstr(haystack, haystack, 15, &success, &failure);
+	test_ft_strnstr(haystack, "", 0, &success, &failure);
+	test_ft_strnstr(haystack, "j", 0, &success, &failure);
+	test_ft_strnstr(haystack, "j", 1, &success, &failure);
+	test_ft_strnstr(haystack, "j", 2, &success, &failure);
+	test_ft_strnstr(haystack, "j", 3, &success, &failure);
+	test_ft_strnstr(big, little, 8, &success, &failure);
+	test_ft_strnstr(haystack, needle5, 2, &success, &failure);
+
 	printf("\t%d success out of %d tests\n", success, (success + failure));
 
 }
