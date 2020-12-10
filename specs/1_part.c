@@ -241,7 +241,7 @@ void spec_first_part(void)
 
 	succes = 0;
 	failure = 0;
-	char strrchar[38] = "aAbBcCdD ZzXxYy\t%|aAbBcCdD ZzXxYy\t%|";
+	char strrchar[38] = "aAbBcCdD ZzXxYy\t%|AbBcCdD ZzXxYy\t%|";
 
 	ptn_expected = strrchr(strrchar, '\0');
 	ptn_result = ft_strrchr(strrchar, '\0');
@@ -257,6 +257,27 @@ void spec_first_part(void)
 		failure++;
 		printf("--------------\n");
 		printf("\033[0;31mKO! for ascii char = \"\\0\" in \"%s\" \n\n", strrchar);
+		printf("\033[1;32mExpected = %p\n", ptn_expected);
+		printf("\033[0;31mGot = %p\n\n",  ptn_result);
+		printf("\033[0m");
+	}
+
+	char strrchar1[1] = "";
+
+	ptn_expected = strrchr(strrchar1, '\0');
+	ptn_result = ft_strrchr(strrchar1, '\0');
+	if (ptn_expected == ptn_result)
+	{
+		succes++;
+		//printf("\033[1;32m");
+		//printf("OK for char = \"%c\"\n", my_char);
+		//printf("\033[0m");
+	}
+	else
+	{
+		failure++;
+		printf("--------------\n");
+		printf("\033[0;31mKO! for ascii char = \"\\0\" in \"%s\" \n\n", strrchar1);
 		printf("\033[1;32mExpected = %p\n", ptn_expected);
 		printf("\033[0;31mGot = %p\n\n",  ptn_result);
 		printf("\033[0m");
