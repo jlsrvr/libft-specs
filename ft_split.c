@@ -6,7 +6,7 @@
 /*   By: jrivoire <jrivoire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 16:25:31 by jrivoire          #+#    #+#             */
-/*   Updated: 2020/11/27 10:21:41 by jrivoire         ###   ########.fr       */
+/*   Updated: 2020/12/10 22:47:57 by jrivoire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,13 @@ static int		count_words(char const *s, char c)
 	index = 0;
 	while (s[index])
 	{
-		while (s[index] == c)
+		while (s[index] && s[index] == c)
 			index++;
-		if (index > 0 && s[index] && s[index - 1] == c)
-			counter++;
 		if (s[index])
+			counter++;
+		while (s[index] && s[index] != c)
 			index++;
 	}
-	if (counter == 0 && s[index - 1] == c)
-		return (counter);
-	if (s[0] != c)
-		counter++;
 	return (counter);
 }
 
