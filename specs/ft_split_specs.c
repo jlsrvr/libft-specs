@@ -1,5 +1,6 @@
 #include "../libft.h"
 #include <stdio.h>
+#include <string.h>
 
 static void display_result(char const *s, char c, char **result, char *describe, int success)
 {
@@ -15,50 +16,11 @@ static void display_result(char const *s, char c, char **result, char *describe,
 	printf("\033[0m");
 }
 
-static	int	len_array(char **array)
+static int check_ft_split(char ** expected, char ** got)
 {
-	int count;
-
-	count = 0;
-	while (array[count])
-		count++;
-	return(count);
-}
-
-static int  count_words(char const *s, char c)
-{
-  size_t counter;
-  size_t index;
-
-  counter = 0;
-  index = 0;
-  while (s[index])
-  {
-    while (s[index] == c)
-      index++;
-    if (index > 0 && s[index] && s[index - 1] == c)
-      counter++;
-    if (s[index])
-      index++;
-  }
-  if (counter == 0 && s[index - 1] == c)
-    return(counter);
-  if (s[0] != c)
-    counter++;
-  return (counter);
-}
-
-static int check_ft_split(char const *s, char c, char **result)
-{
-	int i;
-	size_t len_s;
-
-	len_s = ft_strlen(s);
- 	if (count_words(s, c) != len_array(result))
-		return (0);
-	for (i = 0; result[i]; i++)
+	for (; *expected; expected++, got++)
 	{
-		if((ft_strnstr(s, result[i], len_s)) && (ft_strchr(result[i], c)) && (c != 0))
+		if (*got == NULL || strcmp(*expected, *got))
 			return (0);
 	}
 	return (1);
@@ -85,7 +47,7 @@ void specs_ft_split(int *sucess, int *failure)
 	c = 's';
 	describe = "Null string";
 	ptn_result = ft_split(s, c);
-	if (*ptn_result == NULL)
+	if (check_ft_split((char*[1]){NULL}, ptn_result))
 	{
 		(*sucess)++;
 		//display_result(s, c, ptn_result, describe, 1);
@@ -101,7 +63,7 @@ void specs_ft_split(int *sucess, int *failure)
 	c = 's';
 	describe = "Empty string";
 	ptn_result = ft_split(s, c);
-	if (*ptn_result == NULL)
+	if (check_ft_split((char*[1]){NULL}, ptn_result))
 	{
 		(*sucess)++;
 		//display_result(s, c, ptn_result, describe, 1);
@@ -117,7 +79,7 @@ void specs_ft_split(int *sucess, int *failure)
 	c = 's';
 	describe = "Separator not in string";
 	ptn_result = ft_split(s, c);
-	if (check_ft_split(s, c, ptn_result))
+	if (check_ft_split((char*[2]){(char*)s, NULL}, ptn_result))
 	{
 		(*sucess)++;
 		//display_result(s, c, ptn_result, describe, 1);
@@ -133,7 +95,7 @@ void specs_ft_split(int *sucess, int *failure)
 	c = 's';
 	describe = "Separator beginning";
 	ptn_result = ft_split(s, c);
-	if (check_ft_split(s, c, ptn_result))
+	if (check_ft_split((char*[2]){"onetwothreefour", NULL}, ptn_result))
 	{
 		(*sucess)++;
 		//display_result(s, c, ptn_result, describe, 1);
@@ -149,7 +111,7 @@ void specs_ft_split(int *sucess, int *failure)
 	c = 's';
 	describe = "Separator middle";
 	ptn_result = ft_split(s, c);
-	if (check_ft_split(s, c, ptn_result))
+	if (check_ft_split((char*[5]){"one", "two", "three", "four", NULL}, ptn_result))
 	{
 		(*sucess)++;
 		//display_result(s, c, ptn_result, describe, 1);
@@ -165,7 +127,7 @@ void specs_ft_split(int *sucess, int *failure)
 	c = 's';
 	describe = "Separator end";
 	ptn_result = ft_split(s, c);
-	if (check_ft_split(s, c, ptn_result))
+	if (check_ft_split((char*[2]){"onetwothreefour", NULL}, ptn_result))
 	{
 		(*sucess)++;
 		//display_result(s, c, ptn_result, describe, 1);
@@ -181,7 +143,7 @@ void specs_ft_split(int *sucess, int *failure)
 	c = 's';
 	describe = "Separator everywhere";
 	ptn_result = ft_split(s, c);
-	if (check_ft_split(s, c, ptn_result))
+	if (check_ft_split((char*[7]){"one", "two", "three", "four", "five", "ix", NULL}, ptn_result))
 	{
 		(*sucess)++;
 		//display_result(s, c, ptn_result, describe, 1);
@@ -193,11 +155,11 @@ void specs_ft_split(int *sucess, int *failure)
 	}
 	free_result(ptn_result);
 
-	s = "sonestwosthreesfour";
+	s = "onetwo";
 	c = 0;
 	describe = "Empty separator";
 	ptn_result = ft_split(s, c);
-	if (check_ft_split(s, c, ptn_result))
+	if (check_ft_split((char*[2]){"onetwo", NULL}, ptn_result))
 	{
 		(*sucess)++;
 		//display_result(s, c, ptn_result, describe, 1);
@@ -213,7 +175,23 @@ void specs_ft_split(int *sucess, int *failure)
 	c = 's';
 	describe = "Only separators";
 	ptn_result = ft_split(s, c);
-	if (check_ft_split(s, c, ptn_result))
+	if (check_ft_split((char*[1]){NULL}, ptn_result))
+	{
+		(*sucess)++;
+		//display_result(s, c, ptn_result, describe, 1);
+	}
+	else
+	{
+		(*failure)++;
+		display_result(s, c, ptn_result, describe, 0);
+	}
+	free_result(ptn_result);
+
+	s = "toto ssss";
+	c = 's';
+	describe = "One word many separators";
+	ptn_result = ft_split(s, c);
+	if (check_ft_split((char*[2]){"toto ", NULL}, ptn_result))
 	{
 		(*sucess)++;
 		//display_result(s, c, ptn_result, describe, 1);
