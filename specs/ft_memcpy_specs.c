@@ -6,6 +6,8 @@ static int comp_null_begun_strings(void *str1, void *str2, int size)
 {
 	int index;
 
+	if (str1 == NULL && str2 == NULL)
+		return(1);
 	index = -1;
 	while (++index < size)
 	{
@@ -99,10 +101,10 @@ void specs_ft_memcpy(void)
 	char src1[6] = "\t%1a";
 	char dest_expected1[25] = "J'ai un tab \"\t\" de 21";
 	char dest_result1[25] = "J'ai un tab \"\t\" de 21";
-
+	//void *src, void *dest_expected, void *dest_result, size_t n, size_t step, int string, int *success, int *failure
 	test_ft_memcpy(src1, dest_expected1, dest_result1, 6, 1, 1, &success, &failure);
 	test_ft_memcpy(NULL, dest_expected1, dest_result1, 1, 1, 1, &success, &failure); // Should return dest
 	test_ft_memcpy(src1, NULL, NULL, 1, 1, 1, &success, &failure); // Should return pointer NULL
-	test_ft_memcpy(NULL, NULL, NULL, 1, 1, 1, &success, &failure); // Should return pointer NULL Segfault if n is more than 0 with any null
+	test_ft_memcpy(NULL, NULL, NULL, 3, 1, 1, &success, &failure); // Should return pointer NULL
 	printf("\t%d success out of %d tests\n", success, (success + failure));
 }
