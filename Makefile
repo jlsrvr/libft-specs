@@ -1,46 +1,46 @@
 # HEADER
 
-NAME							=	libft.a
+NAME			=	libft.a
 
-TESTS							= tests
+TEST			= test
 
-CC								=	gcc
+CC				=	gcc
 
-OBJS							=	${SRCS:.c=.o}
+OBJS			=	$(SRCS:.c=.o)
 
-OBJS_TEST					=	${SRCS_TEST:.c=.o}
+OBJS_TEST		=	$(SRCS_TEST:.c=.o)
 
-SRCS							= $(wildcard ft_*.c)
+SRCS			= $(wildcard ft_*.c)
 
-SRCS_TEST 				=	$(wildcard specs/*.c)
+SRCS_TEST 		=	$(wildcard specs/*.c)
 
-RM								=	rm -f
+RM				=	rm -f
 
-FLAGS							=	-Wall -Wextra -Werror
+FLAGS			=	-Wall -Wextra -Werror
 
 .c.o:
-			${CC} ${FLAGS} -c $< -o ${<:.c=.o}
+			$(CC) $(FLAGS) -c $< -o $(<:.c=.o)
 
-${NAME}:	${OBJS}
-					ar rcs ${NAME} ${OBJS}
+$(NAME):	$(OBJS)
+			ar rcs $(NAME) $(OBJS)
 
-${TEST}: 	${NAME} ${OBJS_TEST}
-					${CC} -o ${TEST} ${OBJS_TEST} -L. -lft
+$(TEST): 	$(NAME) $(OBJS_TEST)
+			$(CC) -o $(TEST) $(OBJS_TEST) -L. -lft
 
-all:			${NAME}
+all:		$(NAME)
 
 clean_t:
-					${RM} ${OBJS_TEST} ${OBJS}
+			$(RM) $(OBJS_TEST) $(OBJS)
 
-fclean_t: clean_t
-					${RM} ${TEST} ${NAME}
+fclean_t:	clean_t
+			$(RM) $(TEST) $(NAME)
 
 clean:
-					${RM} ${OBJS}
+			$(RM) $(OBJS)
 
 fclean: 	clean
-					${RM} ${NAME}
+			$(RM) $(NAME)
 
-re: 			fclean all
+re:			fclean all
 
 .PHONY:	all clean fclean re fclean_t clean_t
