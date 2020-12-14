@@ -496,6 +496,21 @@ void spec_first_part(void)
 			printf("\033[0m");
 		}
 	}
+	char *src2 = NULL;
+	char *dest2 = NULL;
+
+	if ((dest2 == ft_memmove(dest2, src2, len)) && (dest2 == NULL))
+		succes++;
+	else
+	{
+		failure++;
+		printf("--------------\n");
+		printf("\033[0;31mKO! NULL and NULL with len positive\n");
+		printf("\033[1;32mExpected = NULL\n");
+		printf("\033[0;31mGot = %s\n\n", dest2);
+		printf("\033[0m");
+	}
+
 	printf("\t%d success out of %d tests\n", succes, (succes + failure));
 
 	// -----------------------FT_BZERO--------------------------
