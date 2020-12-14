@@ -45,7 +45,10 @@ void spec_first_part(void)
 
 	test_calloc(0, 2, &succes, &failure);
 	test_calloc(1, 0, &succes, &failure);
+	test_calloc(3, 1, &succes, &failure);
+	test_calloc(500, sizeof(int), &succes, &failure);
 	test_calloc(0, 0, &succes, &failure);
+	test_calloc(1, 1, &succes, &failure);
 	test_calloc(19, 19, &succes, &failure);
 
 	printf("\t%d success out of %d tests\n", succes, (succes + failure));
@@ -687,9 +690,9 @@ void test_ascii_change(int (*og)(int), int (*ft)(int))
 
 void test_calloc(size_t count, size_t size, int *succes, int *failure)
 {
-	void *ptn_expected = calloc(size, count);
-	void *ptn_result = ft_calloc(size, count);
-	if (((ptn_expected && ptn_result) || (ptn_result == ptn_expected)) && (malloc_size(ptn_expected) == malloc_size(ptn_result)))
+	void *ptn_expected = calloc(count, size);
+	void *ptn_result = ft_calloc(count, size);
+	if (((ptn_expected && ptn_result) || (ptn_result == ptn_expected)) && (malloc_size(ptn_expected) == malloc_size(ptn_result)) && !memcmp(ptn_expected, ptn_result, count*size))
 	{
 		(*succes)++;
 		/*printf("OK! for count = %zu and size %zu\n\n", count, size);
