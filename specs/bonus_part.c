@@ -2,6 +2,7 @@
 
 void specs_ft_lstnew(int *success, int *failure);
 void specs_ft_lstadd_front(int *success, int *failure);
+void specs_ft_lstsize(int *success, int *failure);
 
 int		success;
 int		failure;
@@ -19,7 +20,7 @@ static void print_results(int success, int failure)
 
 void spec_bonus_part(void)
 {
-	void (*specs[3])(int*, int*);
+	void (*specs[4])(int*, int*);
 	int selected;
 
 	success = 0;
@@ -27,7 +28,8 @@ void spec_bonus_part(void)
 
 	specs[0] = specs_ft_lstnew;
 	specs[1] = specs_ft_lstadd_front;
-	specs[2] = 0;
+	specs[2] = specs_ft_lstsize;
+	specs[3] = 0;
 
 	for (selected = 0; specs[selected]; selected++)
 	{
