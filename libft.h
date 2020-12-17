@@ -6,7 +6,7 @@
 /*   By: jrivoire <jrivoire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 18:26:22 by jrivoire          #+#    #+#             */
-/*   Updated: 2020/12/17 18:09:55 by jrivoire         ###   ########.fr       */
+/*   Updated: 2020/12/17 22:49:32 by jrivoire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int				ft_isalpha(int c);
 int				ft_isascii(int c);
 int				ft_isdigit(int c);
 int				ft_isprint(int c);
+int				ft_lstsize(t_list *lst);
 int				ft_memcmp(const void *s1, const void *s2, size_t n);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
 int				ft_tolower(int c);
