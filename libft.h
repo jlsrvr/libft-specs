@@ -6,7 +6,7 @@
 /*   By: jrivoire <jrivoire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 18:26:22 by jrivoire          #+#    #+#             */
-/*   Updated: 2020/12/17 16:22:03 by jrivoire         ###   ########.fr       */
+/*   Updated: 2020/12/17 18:09:55 by jrivoire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ t_list			*ft_lstnew(void *content);
 
 void			ft_bzero(void *ptr, size_t num);
 void			*ft_calloc(size_t count, size_t size);
+void			ft_lstadd_front(t_list **alst, t_list *new);
 void			*ft_memccpy(void *dest, const void *src, int c, size_t n);
 void			*ft_memchr(const void *s, int c, size_t n);
 void			*ft_memcpy(void *dest, const void *src, size_t n);
