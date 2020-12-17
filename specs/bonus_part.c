@@ -1,6 +1,7 @@
 #include <stdio.h>
 
 void specs_ft_lstnew(int *success, int *failure);
+void specs_ft_lstadd_front(int *success, int *failure);
 
 int		success;
 int		failure;
@@ -18,14 +19,15 @@ static void print_results(int success, int failure)
 
 void spec_bonus_part(void)
 {
-	void (*specs[2])(int*, int*);
+	void (*specs[3])(int*, int*);
 	int selected;
 
 	success = 0;
 	failure = 0;
 
 	specs[0] = specs_ft_lstnew;
-	specs[1] = 0;
+	specs[1] = specs_ft_lstadd_front;
+	specs[2] = 0;
 
 	for (selected = 0; specs[selected]; selected++)
 	{
