@@ -6,7 +6,7 @@
 /*   By: jrivoire <jrivoire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 18:26:22 by jrivoire          #+#    #+#             */
-/*   Updated: 2020/12/17 22:49:32 by jrivoire         ###   ########.fr       */
+/*   Updated: 2020/12/18 16:21:50 by jrivoire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ size_t			ft_strlcat(char *dst, const char *src, size_t dstsize);
 size_t			ft_strlcpy(char *dst, const char *src, size_t dstsize);
 size_t			ft_strlen(char const *str);
 
+t_list			*ft_lstlast(t_list *lst);
 t_list			*ft_lstnew(void *content);
 
 void			ft_bzero(void *ptr, size_t num);
