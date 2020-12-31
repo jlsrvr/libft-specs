@@ -6,7 +6,7 @@
 /*   By: jrivoire <jrivoire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 21:55:47 by jrivoire          #+#    #+#             */
-/*   Updated: 2020/11/30 21:56:10 by jrivoire         ###   ########.fr       */
+/*   Updated: 2020/12/31 15:39:39 by jrivoire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,5 @@ void	ft_bzero(void *str, size_t n)
 
 	index = -1;
 	while (++index < n)
-		((char*)str)[index] = 0;
+		((unsigned char*)str)[index] = 0;
 }
