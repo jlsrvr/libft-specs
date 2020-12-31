@@ -2,6 +2,8 @@
 
 NAME			=	libft.a
 
+TEST			=	test
+
 CC				=	gcc
 
 OBJS			=	$(SRCS:.c=.o)
@@ -57,6 +59,20 @@ RM				=	rm -f
 
 FLAGS			=	-Wall -Wextra -Werror
 
+OBJS_TEST		=	$(SRCS_TEST:.c=.o)
+
+SRCS_TEST 		=	$(wildcard specs/*.c)
+
+
+$(TEST): 	bonus $(OBJS_TEST)
+			$(CC) -o $(TEST) $(OBJS_TEST) -L. -lft
+
+clean_t:
+			$(RM) $(OBJS_TEST) $(OBJS) $(BONUS_OBJS)
+
+fclean_t:	clean_t
+			$(RM) $(TEST) $(NAME)
+
 .c.o:
 	$(CC) $(FLAGS) -c $< -o $(<:.c=.o)
 
@@ -76,4 +92,4 @@ fclean: 	clean
 
 re:			fclean all
 
-.PHONY:	all clean fclean re
+.PHONY:	all clean fclean re fclean_t clean_t
