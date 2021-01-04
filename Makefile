@@ -20,8 +20,8 @@ SRCS			= 	ft_isdigit.c ft_memcpy.c ft_split.c ft_strmapi.c \
 BONUS_OBJS		=	$(BONUS_SRCS:.c=.o)
 
 BONUS_SRCS = 		ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c \
-					ft_lstdelone.c ft_lstiter.c ft_lstlast.c ft_lstnew.c \
-					ft_lstsize.c
+					ft_lstdelone.c ft_lstiter.c ft_lstlast.c ft_lstmap.c \
+					ft_lstnew.c ft_lstsize.c
 
 RM				=	rm -f
 
