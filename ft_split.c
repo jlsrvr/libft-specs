@@ -6,7 +6,7 @@
 /*   By: jrivoire <jrivoire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 16:25:31 by jrivoire          #+#    #+#             */
-/*   Updated: 2020/12/10 22:47:57 by jrivoire         ###   ########.fr       */
+/*   Updated: 2021/01/04 21:33:38 by jrivoire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,28 @@ static	char	*copy_word(char const *s, size_t *begin, char c)
 	return (ft_substr(s, start, (end - start)));
 }
 
+static	char	**free_words(char **dest)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (dest[i])
+	{
+		free(dest[i]);
+		i++;
+	}
+	free(dest);
+	return (NULL);
+}
+
+static	char	**protection(char **dest)
+{
+	if (!(dest = malloc(sizeof(**dest) * 1)))
+		return (NULL);
+	*dest = NULL;
+	return (dest);
+}
+
 char			**ft_split(char const *s, char c)
 {
 	char	**dest;
@@ -52,10 +74,7 @@ char			**ft_split(char const *s, char c)
 
 	if (!s || !*s)
 	{
-		if (!(dest = malloc(sizeof(**dest) * 1)))
-			return (NULL);
-		*dest = NULL;
-		return (dest);
+		return (protection(dest = NULL));
 	}
 	if (!(dest = malloc(sizeof(*dest) * (count_words(s, c) + 1))))
 		return (NULL);
@@ -64,7 +83,10 @@ char			**ft_split(char const *s, char c)
 	while (s[index])
 	{
 		if (s[index] != c)
-			dest[di++] = copy_word(s, &index, c);
+		{
+			if (!(dest[di++] = copy_word(s, &index, c)))
+				return (free_words(dest));
+		}
 		else
 			index++;
 	}
