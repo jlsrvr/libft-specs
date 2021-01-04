@@ -8,6 +8,7 @@ void specs_ft_lstadd_back(int *success, int *failure);
 void specs_ft_lstdelone(int *success, int *failure);
 void specs_ft_lstclear(int *success, int *failure);
 void specs_ft_lstiter(int *success, int *failure);
+void specs_ft_lstmap(int *success, int *failure);
 
 int		success;
 int		failure;
@@ -25,7 +26,7 @@ static void print_results(int success, int failure)
 
 void spec_bonus_part(void)
 {
-	void (*specs[9])(int*, int*);
+	void (*specs[10])(int*, int*);
 	int selected;
 
 	success = 0;
@@ -39,7 +40,8 @@ void spec_bonus_part(void)
 	specs[5] = specs_ft_lstdelone;
 	specs[6] = specs_ft_lstclear;
 	specs[7] = specs_ft_lstiter;
-	specs[8] = 0;
+	specs[8] = specs_ft_lstmap;
+	specs[9] = 0;
 
 	for (selected = 0; specs[selected]; selected++)
 	{

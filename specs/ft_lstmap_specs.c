@@ -1,15 +1,23 @@
 #include "../libft.h"
 #include <stdio.h>
 
-ICI LES FONCTIONS DOIVENT RENVOYER UN POINTEUR SU OBJET VOID
-static void add_one_test(void *content)
+static void *add_one_test(void *content)
 {
-	(*(int*)content)++;
+	int temp;
+
+	temp = *(int*)content + 1;
+	content = malloc(sizeof(temp) * 1);
+	*(int*)content = temp;
+	return (content);
 }
 
-static void put_to_zero_test(void *content)
+static void *put_to_zero_test(void *content)
 {
-	*(int*)content = 0;
+	if (*(int*)content % 2)
+	{
+		return (add_one_test(content));
+	}
+	return (NULL);
 }
 
 static void del(void *content)
@@ -17,7 +25,12 @@ static void del(void *content)
 	free(content);
 }
 
-static void display_result(char *describe, t_list *lst, int *expected_result, int success)
+static void delb(void *content)
+{
+	(void)content;
+}
+
+static void display_result(char *describe, t_list *lst, int *start, int *copy, int success)
 {
 	int rindex;
 
@@ -25,52 +38,85 @@ static void display_result(char *describe, t_list *lst, int *expected_result, in
 	printf("%s\n", describe);
 	(success) ? printf("\033[0;32mOK!\n") : printf("\033[0;31mKO!\n");
 	rindex = 0;
+	if (start)
+	{
+		printf("Original values: ");
+		while (rindex < 5)
+			printf("%d, ", copy[rindex++]);
+		printf("%d.\n", copy[rindex]);
+		rindex = 0;
+		printf("Original list: ");
+		while (rindex < 5)
+			printf("%d, ", start[rindex++]);
+		printf("%d.\n", start[rindex]);
+		rindex = 0;
+	}
 	while (lst)
 	{
-		printf("%d. ", rindex);
-		printf("Expecting \"%d\", got = \"%d\"\n", expected_result[rindex++], *((int*)(lst->content)));
+		printf("%d. ", rindex++);
+		if (!((int*)lst->content))
+			printf("Got = %s\n", lst->content);
+		else
+			printf("Got = %d\n", *(int*)lst->content);
 		lst = lst->next;
 	}
 	printf("\033[0m");
 }
 
-static int check_ft_lstmap(t_list *og_lst, t_list *new_lst, int *expected_result)
+static int check_ft_lstmap(t_list *og_lst, t_list *new_lst, void *(*f)(void*), int *depart)
 {
-	int rindex;
+	int index;
 
-	rindex = 0;
+	index = 0;
+	if ((!f && !new_lst) || (!depart && !new_lst))
+		return (1);
 	if ((og_lst == new_lst) || (ft_lstsize(og_lst) != ft_lstsize(new_lst)))
 		return (0);
 	while(new_lst)
 	{
-		if(*((int*)(new_lst->content)) != expected_result[rindex++])
+		if(*(int*)og_lst->content != depart[index++])
+			return (0);
+		if(!((int*)f(og_lst->content)) && !((int*)new_lst->content))
+		{
+			new_lst = new_lst->next;
+			og_lst = og_lst->next;
+			continue ;
+		}
+		if(*(int*)f(og_lst->content) != *(int*)new_lst->content)
 			return (0);
 		new_lst = new_lst->next;
+		og_lst = og_lst->next;
 	}
 	return (1);
 }
 
-static void test_ft_lstmap(char *describe, int *depart, void (*f)(void *), int *exp_results, int *success, int *failure)
+static void test_ft_lstmap(char *describe, int *copy, int *depart, void *(*f)(void *), int *success, int *failure)
 {
 	t_list *og_lst;
+	t_list *new_lst;
 	int		dindex;
 
-	og_lst = ft_lstnew(depart);
-	for (dindex = 1; dindex < 6; dindex++)
-		ft_lstadd_back(&og_lst, ft_lstnew(&depart[dindex]));
-
-	new_lst = ft_lstmap(first, f, &del);
-	if (check_ft_lstmap(og_lst, new_lst, exp_results))
+	if (depart)
+	{
+		og_lst = ft_lstnew(depart);
+		for (dindex = 1; dindex < 6; dindex++)
+			ft_lstadd_back(&og_lst, ft_lstnew(&depart[dindex]));
+	}
+	else
+		og_lst = NULL;
+	new_lst = ft_lstmap(og_lst, f, &del);
+	if (check_ft_lstmap(og_lst, new_lst, f, copy))
 	{
 		(*success)++;
-		display_result(describe, first, exp_results, 1);
+		//display_result(describe, new_lst, depart, copy, 1);
 	}
 	else
 	{
 		(*failure)++;
-		display_result(describe, first, exp_results, 0);
+		display_result(describe, new_lst, depart, copy, 0);
 	}
-	ft_lstclear(&first, free);
+	ft_lstclear(&og_lst, &delb);
+	ft_lstclear(&new_lst, &del);
 }
 
 void specs_ft_lstmap(int *success, int *failure)
@@ -78,11 +124,10 @@ void specs_ft_lstmap(int *success, int *failure)
 	printf("Tests for %s\n", &__func__[6]);
 
 	int depart[6] = {1, 2, 3, 4, 5, 6};
-	int expected[6] = {2, 3, 4, 5, 6, 7};
+	int copy[6] = {1, 2, 3, 4, 5, 6};
 
-	test_ft_lstmap("Add 1 to each content", depart, &add_one_test, expected, success, failure);
-	int expected2[6] = {0, 0, 0, 0, 0, 0};
-	test_ft_lstmap("Put to zero", depart, &put_to_zero_test, expected2, success, failure);
-	test_ft_lstmap("Pointer function goes to NULL", depart, NULL, expected2, success, failure);
-	test_ft_lstmap("List points to NULL", depart, &put_to_zero_test, expected2, success, failure);
+	test_ft_lstmap("Add 1 to each content", depart, copy, &add_one_test, success, failure);
+	test_ft_lstmap("Put to zero", depart, copy, &put_to_zero_test, success, failure);
+	test_ft_lstmap("Function pointer goes to NULL", depart, copy, NULL, success, failure);
+	test_ft_lstmap("List points to NULL", NULL, NULL, &put_to_zero_test, success, failure);
 }
