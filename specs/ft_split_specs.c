@@ -171,6 +171,22 @@ void specs_ft_split(int *sucess, int *failure)
 	}
 	free_result(ptn_result);
 
+	s = "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultricies diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi.";
+	c = 'i';
+	describe = "Long Lorem";
+	ptn_result = ft_split(s, c);
+	if (check_ft_split((char*[26]){"lorem ", "psum dolor s", "t amet, consectetur ad", "p", "sc", "ng el", "t. Sed non r", "sus. Suspend", "sse lectus tortor, d", "gn", "ss", "m s", "t amet, ad", "p", "sc", "ng nec, ultr", "c", "es sed, dolor. Cras elementum ultr", "c", "es d" ,"am. Maecenas l", "gula massa, var", "us a, semper congue, eu", "smod non, m", ".", NULL}, ptn_result))
+	{
+		(*sucess)++;
+		//display_result(s, c, ptn_result, describe, 1);
+	}
+	else
+	{
+		(*failure)++;
+		display_result(s, c, ptn_result, describe, 0);
+	}
+	free_result(ptn_result);
+
 	s = "ssss";
 	c = 's';
 	describe = "Only separators";
