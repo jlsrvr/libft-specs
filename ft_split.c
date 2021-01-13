@@ -6,7 +6,7 @@
 /*   By: jrivoire <jrivoire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 16:25:31 by jrivoire          #+#    #+#             */
-/*   Updated: 2021/01/04 21:33:38 by jrivoire         ###   ########.fr       */
+/*   Updated: 2021/01/13 17:16:55 by jrivoire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,10 @@ static	char	**free_words(char **dest)
 
 static	char	**protection(char **dest)
 {
-	if (!(dest = malloc(sizeof(**dest) * 1)))
+	dest = (char **)malloc(sizeof(char *) * 1);
+	if (dest == NULL)
 		return (NULL);
-	*dest = NULL;
+	dest[0] = NULL;
 	return (dest);
 }
 
