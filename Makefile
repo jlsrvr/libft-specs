@@ -57,7 +57,7 @@ BONUS_SRCS = 		ft_lstadd_back.c \
 
 RM				=	rm -f
 
-FLAGS			=	-Wall -Wextra -Werror
+FLAGS			=	-Wall -Wextra -Werror -fsanitize=address
 
 OBJS_TEST		=	$(SRCS_TEST:.c=.o)
 
@@ -65,7 +65,7 @@ SRCS_TEST 		=	$(wildcard specs/*.c)
 
 
 $(TEST): 	bonus $(OBJS_TEST)
-			$(CC) -o $(TEST) $(OBJS_TEST) -L. -lft
+			$(CC) $(FLAGS) -o $(TEST) $(OBJS_TEST) -L. -lft
 
 clean_t:
 			$(RM) $(OBJS_TEST) $(OBJS) $(BONUS_OBJS)
