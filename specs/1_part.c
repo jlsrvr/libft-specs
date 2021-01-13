@@ -8,6 +8,8 @@ void		print_null_begun_string(void *str, int size);
 int			comp_null_begun_strings(void *str1, void *str2, int size);
 void		test_ascii_change(int (*og)(int), int (*ft)(int));
 void		test_calloc(size_t count, size_t size, int *succes, int *failure);
+void		test_strncmp(char *str1, char *str2 , size_t len, int *succes, int *failure);
+void		test_memcmp(void *str1, void *str2 , size_t len, int *succes, int *failure);
 void		specs_ascii_verification(void);
 void		specs_ft_strnstr(void);
 void		specs_ft_memcpy(void);
@@ -192,50 +194,22 @@ void spec_first_part(void)
 
 	succes = 0;
 	failure = 0;
-
-	expected = strncmp("a string", "whatever", 0);
-	result = ft_strncmp("a string", "whatever", 0);
-	if ( expected == result )
-		succes++;
-	else
-	{
-		failure++;
-		printf("--------------\n");
-		printf("\033[0;31mKO! comparing for \"a string\" with \"whatever\" up to 0\n\n");
-		printf("\033[1;32mExpected = %d\n", expected);
-		printf("\033[0;31mGot = %d\n\n", result);
-		printf("\033[0m");
-	}
-
-	for(my_char = 0; my_char < 6; my_char++)
-	{
-		for(counter = 0; counter < 6; counter++)
-		{
-			char strs[6][10] = {"Tes\n34", " ", "tes", "123456789", ""};
-			strs[5][0] = -12;
-
-			expected = strncmp(strs[my_char], strs[my_char - counter], 15);
-			result = ft_strncmp(strs[my_char], strs[my_char - counter], 15);
-			if ( expected == result )
-			{
-				succes++;
-				//printf("\033[1;32m");
-				//printf("0K! with size = %d for string = \"J'ai un tab \"\t\" de 21\"\n\n", my_char);
-				//printf("Expected = %s\n", str_expected);
-				//printf("Got = %s\n\n",  str_result);
-				//printf("\033[0m");
-			}
-			else
-			{
-				failure++;
-				printf("--------------\n");
-				printf("\033[0;31mKO! comparing for \"%s\" with \"%s\" up to 15\n\n", strs[my_char], strs[my_char - counter]);
-				printf("\033[1;32mExpected = %d\n", expected);
-				printf("\033[0;31mGot = %d\n\n", result);
-				printf("\033[0m");
-			}
-		}
-	}
+	char *string = "a string";
+	char *wateva = "whatever";
+	test_strncmp(string, wateva , 0, &succes, &failure);
+	test_strncmp(string, wateva , 1, &succes, &failure);
+	test_strncmp(string, wateva , 16, &succes, &failure);
+	test_strncmp("", "whatever" , 5, &succes, &failure);
+	test_strncmp("", "" , 5, &succes, &failure);
+	test_strncmp("   ", "" , 5, &succes, &failure);
+	test_strncmp("   ", "   " , 5, &succes, &failure);
+	test_strncmp("\t", "yeh" , 5, &succes, &failure);
+	char str_test_ncmp[3];
+	str_test_ncmp[0] = 'c';
+	str_test_ncmp[1] = -12;
+	str_test_ncmp[2] = 0;
+	test_strncmp("\t", str_test_ncmp , 5, &succes, &failure);
+	test_strncmp(str_test_ncmp, str_test_ncmp , 5, &succes, &failure);
 	printf("\t%d success out of %d tests\n", succes, (succes + failure));
 
 	// -----------------------FT_STRRCHR--------------------------
@@ -366,49 +340,20 @@ void spec_first_part(void)
 	succes = 0;
 	failure = 0;
 
-	expected = memcmp("a string", "whatever", 0);
-	result = ft_memcmp("a string", "whatever", 0);
-	if ( expected == result )
-		succes++;
-	else
-	{
-		failure++;
-		printf("--------------\n");
-		printf("\033[0;31mKO! comparing for \"a string\" with \"whatever\" up to 0\n\n");
-		printf("\033[1;32mExpected = %d\n", expected);
-		printf("\033[0;31mGot = %d\n\n", result);
-		printf("\033[0m");
-	}
-
-	for(my_char = 0; my_char < 6; my_char++)
-	{
-		for(counter = 0; counter < 6; counter++)
-		{
-			char strs[6][10] = {"Tes\n34", " ", "tes", "123456789", ""};
-			strs[5][0] = -12;
-
-			expected = memcmp(strs[my_char], strs[my_char - counter], 15);
-			result = ft_memcmp(strs[my_char], strs[my_char - counter], 15);
-			if ( expected == result )
-			{
-				succes++;
-				//printf("\033[1;32m");
-				//printf("0K! with size = %d for string = \"J'ai un tab \"\t\" de 21\"\n\n", my_char);
-				//printf("Expected = %s\n", str_expected);
-				//printf("Got = %s\n\n",  str_result);
-				//printf("\033[0m");
-			}
-			else
-			{
-				failure++;
-				printf("--------------\n");
-				printf("\033[0;31mKO! comparing for \"%s\" with \"%s\" up to 15\n\n", strs[my_char], strs[my_char - counter]);
-				printf("\033[1;32mExpected = %d\n", expected);
-				printf("\033[0;31mGot = %d\n\n", result);
-				printf("\033[0m");
-			}
-		}
-	}
+	test_memcmp(string, wateva , 0, &succes, &failure);
+	test_memcmp(string, wateva , 1, &succes, &failure);
+	test_memcmp(string, wateva , 16, &succes, &failure);
+	test_memcmp("", "whatever" , 5, &succes, &failure);
+	test_memcmp("", "" , 5, &succes, &failure);
+	test_memcmp("   ", "" , 5, &succes, &failure);
+	test_memcmp("   ", "   " , 5, &succes, &failure);
+	test_memcmp("\t", "yeh" , 5, &succes, &failure);
+	char str_test_memcmp[3];
+	str_test_memcmp[0] = 'c';
+	str_test_memcmp[1] = -12;
+	str_test_memcmp[2] = 0;
+	test_memcmp("\t", str_test_memcmp , 5, &succes, &failure);
+	test_memcmp(str_test_memcmp, str_test_memcmp , 5, &succes, &failure);
 	printf("\t%d success out of %d tests\n", succes, (succes + failure));
 
 	// -----------------------FT_MEMCHR--------------------------
@@ -726,4 +671,60 @@ void test_calloc(size_t count, size_t size, int *succes, int *failure)
 	}
 	free(ptn_expected);
 	free(ptn_result);
+}
+
+void test_strncmp(char *str1, char *str2 , size_t len, int *succes, int *failure)
+{
+	int		expected;
+	int		result;
+
+	expected = strncmp(str1, str2, len);
+	result = ft_strncmp(str1, str2, len);
+	if ( expected == result )
+	{
+		(*succes)++;
+		/*printf("\033[1;32m");
+		printf("OK! comparing for \"%s\" with \"%s\" up to %zu\n\n", str1, str2, len);
+		printf("Expected = %d\n", expected);
+		printf("Got = %d\n\n",  result);
+		printf("\033[0m");*/
+	}
+	else
+	{
+		(*failure)++;
+		printf("--------------\n");
+		printf("\033[0;31mKO! comparing for \"%s\" with \"%s\" up to %zu\n\n", str1, str2, len);
+		printf("\033[1;32mExpected = %d\n", expected);
+		printf("\033[0;31mGot = %d\n\n", result);
+		printf("\033[0m");
+	}
+
+}
+
+void test_memcmp(void *str1, void *str2 , size_t len, int *succes, int *failure)
+{
+	int		expected;
+	int		result;
+
+	expected = memcmp(str1, str2, len);
+	result = ft_memcmp(str1, str2, len);
+	if ( expected == result )
+	{
+		(*succes)++;
+		/*printf("\033[1;32m");
+		printf("OK! comparing for \"%s\" with \"%s\" up to %zu\n\n", str1, str2, len);
+		printf("Expected = %d\n", expected);
+		printf("Got = %d\n\n",  result);
+		printf("\033[0m");*/
+	}
+	else
+	{
+		(*failure)++;
+		printf("--------------\n");
+		printf("\033[0;31mKO! comparing for \"%s\" with \"%s\" up to %zu\n\n", str1, str2, len);
+		printf("\033[1;32mExpected = %d\n", expected);
+		printf("\033[0;31mGot = %d\n\n", result);
+		printf("\033[0m");
+	}
+
 }
