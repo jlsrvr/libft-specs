@@ -22,7 +22,6 @@ void spec_first_part(void)
 	int		result;
 	int		succes;
 	int		failure;
-	int		counter;
 	char	*ptn_expected;
 	char	*ptn_result;
 	void (*specs[5])(void);
@@ -196,12 +195,13 @@ void spec_first_part(void)
 	failure = 0;
 	char *string = "a string";
 	char *wateva = "whatever";
+	char *vide = "";
 	test_strncmp(string, wateva , 0, &succes, &failure);
 	test_strncmp(string, wateva , 1, &succes, &failure);
 	test_strncmp(string, wateva , 16, &succes, &failure);
-	test_strncmp("", "whatever" , 5, &succes, &failure);
-	test_strncmp("", "" , 5, &succes, &failure);
-	test_strncmp("   ", "" , 5, &succes, &failure);
+	test_strncmp(vide, "whatever" , 5, &succes, &failure);
+	test_strncmp(vide, vide , 1, &succes, &failure);
+	test_strncmp("   ", vide , 5, &succes, &failure);
 	test_strncmp("   ", "   " , 5, &succes, &failure);
 	test_strncmp("\t", "yeh" , 5, &succes, &failure);
 	char str_test_ncmp[3];
@@ -220,8 +220,8 @@ void spec_first_part(void)
 	failure = 0;
 	char strrchar[38] = "aAbBcCdD ZzXxYy\t%|AbBcCdD ZzXxYy\t%|";
 
-	ptn_expected = strrchr(strrchar, '\0');
-	ptn_result = ft_strrchr(strrchar, '\0');
+	ptn_expected = strrchr(strrchar, 0);
+	ptn_result = ft_strrchr(strrchar, 0);
 	if (ptn_expected == ptn_result)
 	{
 		succes++;
@@ -342,10 +342,10 @@ void spec_first_part(void)
 
 	test_memcmp(string, wateva , 0, &succes, &failure);
 	test_memcmp(string, wateva , 1, &succes, &failure);
-	test_memcmp(string, wateva , 16, &succes, &failure);
-	test_memcmp("", "whatever" , 5, &succes, &failure);
-	test_memcmp("", "" , 5, &succes, &failure);
-	test_memcmp("   ", "" , 5, &succes, &failure);
+	test_memcmp(string, wateva , 9, &succes, &failure);
+	test_memcmp(vide, "whatever" , 5, &succes, &failure);
+	test_memcmp(vide, vide , 1, &succes, &failure);
+	test_memcmp("   ", vide, 5, &succes, &failure);
 	test_memcmp("   ", "   " , 5, &succes, &failure);
 	test_memcmp("\t", "yeh" , 5, &succes, &failure);
 	char str_test_memcmp[3];
@@ -571,7 +571,7 @@ void spec_first_part(void)
 			printf("\033[0m");
 		}
 	}
-	expected = 0; // no defined behaviour in this case for the actual strlen
+	/*expected = 0; // no defined behaviour in this case for the actual strlen
 	result = ft_strlen(NULL);
 	if (expected == result)
 	{
@@ -588,7 +588,7 @@ void spec_first_part(void)
 		printf("\033[1;32mExpected = %d\n",  expected);
 		printf("\033[0;31mGot = %d\n\n",  result);
 		printf("\033[0m");
-	}
+	}*/
 	printf("\t%d success out of %d tests\n", succes, (succes + failure));
 }
 

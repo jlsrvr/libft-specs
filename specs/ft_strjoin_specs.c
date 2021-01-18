@@ -13,8 +13,16 @@ static void display_result(char *s1, char *s2, char *result, size_t expected_len
 
 static int check_ft_strjoin(char *s1, char *s2, char *result)
 {
-	int len_s1 = ft_strlen(s1);
-	int len_s2 = ft_strlen(s2);
+	int len_s1;
+	int len_s2;
+	if (s1)
+		len_s1 = ft_strlen(s1);
+	else
+		len_s1 = 0;
+	if (s2)
+		len_s2 = ft_strlen(s2);
+	else
+		len_s2 = 0;
 	if (ft_strncmp(result, s1, len_s1))
 		return (0);
 	if (ft_strncmp(&result[len_s1], s2, len_s2))
@@ -56,7 +64,7 @@ void specs_ft_strjoin(int *succes, int *failure)
 	s1 = NULL;
 	s2 = strs[0];
 	ptn_result = ft_strjoin(s1, s2);
-	expected_len = (ft_strlen(s1) + ft_strlen(s2));
+	expected_len = (0 + ft_strlen(s2));
 	if ((ft_strlen(ptn_result) == expected_len) && check_ft_strjoin(s1, s2, ptn_result))
 	{
 		(*succes)++;
@@ -71,7 +79,7 @@ void specs_ft_strjoin(int *succes, int *failure)
 	s1 = strs[0];
 	s2 = NULL;
 	ptn_result = ft_strjoin(s1, s2);
-	expected_len = (ft_strlen(s1) + ft_strlen(s2));
+	expected_len = (ft_strlen(s1) + 0);
 	if (!ft_strncmp(ptn_result, s1, ft_strlen(s1)))
 	{
 		(*succes)++;
@@ -86,7 +94,7 @@ void specs_ft_strjoin(int *succes, int *failure)
 	s1 = NULL;
 	s2 = NULL;
 	ptn_result = ft_strjoin(s1, s2);
-	expected_len = (ft_strlen(s1) + ft_strlen(s2));
+	expected_len = 0;
 	if (!ft_strncmp(ptn_result, "", 1))
 	{
 		(*succes)++;

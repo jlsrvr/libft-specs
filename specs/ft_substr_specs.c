@@ -38,7 +38,7 @@ void specs_ft_substr(int *succes, int *failure)
 	start = 1;
 	len = 6;
 	ptn_result = ft_substr(NULL, start, len);
-	if ((ft_strlen(ptn_result) <= len) && (ptn_result == NULL))
+	if (ptn_result == NULL)
 	{
 		(*succes)++;
 		//display_result(strs[1], ptn_result, start, len, 1);
