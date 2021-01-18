@@ -342,18 +342,18 @@ void spec_first_part(void)
 
 	test_memcmp(string, wateva , 0, &succes, &failure);
 	test_memcmp(string, wateva , 1, &succes, &failure);
-	test_memcmp(string, wateva , 9, &succes, &failure);
-	test_memcmp(vide, "whatever" , 5, &succes, &failure);
+	test_memcmp(string, wateva , 8, &succes, &failure);
+	test_memcmp(vide, "whatever" , 1, &succes, &failure);
 	test_memcmp(vide, vide , 1, &succes, &failure);
-	test_memcmp("   ", vide, 5, &succes, &failure);
-	test_memcmp("   ", "   " , 5, &succes, &failure);
-	test_memcmp("\t", "yeh" , 5, &succes, &failure);
+	test_memcmp("   ", vide, 1, &succes, &failure);
+	test_memcmp("   ", "   " , 2, &succes, &failure);
+	test_memcmp("\t", "yeh" , 2, &succes, &failure);
 	char str_test_memcmp[3];
 	str_test_memcmp[0] = 'c';
 	str_test_memcmp[1] = -12;
 	str_test_memcmp[2] = 0;
-	test_memcmp("\t", str_test_memcmp , 5, &succes, &failure);
-	test_memcmp(str_test_memcmp, str_test_memcmp , 5, &succes, &failure);
+	test_memcmp("\t", str_test_memcmp , 2, &succes, &failure);
+	test_memcmp(str_test_memcmp, str_test_memcmp , 2, &succes, &failure);
 	printf("\t%d success out of %d tests\n", succes, (succes + failure));
 
 	// -----------------------FT_MEMCHR--------------------------
@@ -362,16 +362,16 @@ void spec_first_part(void)
 
 	succes = 0;
 	failure = 0;
-
-	ptn_expected = memchr("Nothing", '\n', 9);
-	ptn_result = ft_memchr("Nothing", '\n', 9);
+	char *nothing = "Nothing";
+	ptn_expected = memchr(nothing, '\n', 8);
+	ptn_result = ft_memchr(nothing, '\n', 8);
 	if ( ptn_expected == ptn_result )
 	{
 		succes++;
 		//printf("\033[1;32m");
 		//printf("0K! with size = %d for string = \"J'ai un tab \"\t\" de 21\"\n\n", my_char);
-		//printf("Expected = %s\n", str_expected);
-		//printf("Got = %s\n\n",  str_result);
+		//printf("\033[1;32mExpected = %p\n", ptn_expected);
+		//printf("\033[0;31mGot = %p\n\n", ptn_result);
 		//printf("\033[0m");
 	}
 	else
@@ -472,7 +472,7 @@ void spec_first_part(void)
 
 		bzero(str_expected, my_char);
 		ft_bzero(str_result, my_char);
-		if ( comp_null_begun_strings(str_expected, str_result, 23) )
+		if (comp_null_begun_strings(str_expected, str_result, my_char))
 		{
 			succes++;
 			//printf("\033[1;32m");
@@ -504,14 +504,14 @@ void spec_first_part(void)
 	succes = 0;
 	failure = 0;
 
-	for(my_char = 0; my_char < 23; my_char++)
+	for(my_char = 0; my_char < 22; my_char++)
 	{
-		char str_expected[] = "J'ai un tab \"\t\" de 21";
-		char str_result[] = "J'ai un tab \"\t\" de 21";
+		char str_expected[22] = "J'ai un tab \"\t\" de 21";
+		char str_result[22] = "J'ai un tab \"\t\" de 21";
 
 		memset(str_expected, '&', my_char);
 		ft_memset(str_result, '&', my_char);
-		if ( strcmp(str_expected, str_result) == 0 )
+		if (strcmp(str_expected, str_result) == 0)
 		{
 			succes++;
 			//printf("\033[1;32m");
