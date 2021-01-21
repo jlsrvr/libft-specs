@@ -7,11 +7,12 @@ void specs_ft_putstr_fd(int *sucess, int *failure)
 	(void)sucess;
 	(void)failure;
 	int index;
-	char *strs[4];
-	strs[3] = 0;
+	char *strs[5];
+	strs[4] = 0;
 	strs[0] = "3";
 	strs[1] = "qwertyuQWERTY\n\t  @$'\\|";
 	strs[2] = "";
+	strs[3] = NULL;
 
 	for(index = 0; strs[index]; index++)
 	{

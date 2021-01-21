@@ -185,6 +185,27 @@ void spec_first_part(void)
 			printf("\033[0m");
 		}
 	}
+		char *srclcpy = "MagiquE";
+		char *expected_dst = NULL;
+		char *result_dst = NULL;
+
+		result = (int)ft_strlcpy(result_dst, srclcpy, (size_t)1);
+		if ((0 == result) && (expected_dst == NULL))
+		{
+			succes++;
+			//printf("\033[1;32m");
+			//printf("OK for char = \"%c\"\n", my_char);
+			//printf("\033[0m");
+		}
+		else
+		{
+			failure++;
+			printf("--------------\n");
+			printf("\033[0;31mKO! for dstsize = \"%d\"\n\n", 1);
+			printf("\033[1;32mExpected = %d with \"%s\"\n", 0, NULL);
+			printf("\033[0;31mGot = %d with \"%s\"\n\n",  result, result_dst);
+			printf("\033[0m");
+		}
 	printf("\t%d success out of %d tests\n", succes, (succes + failure));
 
 	// -----------------------FT_STRNCMP--------------------------
