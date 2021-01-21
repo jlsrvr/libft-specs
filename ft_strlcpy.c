@@ -6,7 +6,7 @@
 /*   By: jrivoire <jrivoire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 21:59:36 by jrivoire          #+#    #+#             */
-/*   Updated: 2020/12/01 22:58:21 by jrivoire         ###   ########.fr       */
+/*   Updated: 2021/01/21 15:50:09 by jrivoire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	size_t lensrc;
 	size_t index;
 
+	if (!dst)
+		return (0);
 	lensrc = (size_t)ft_strlen((char*)src);
 	index = 0;
 	if (dstsize < 1)
