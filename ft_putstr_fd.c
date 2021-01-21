@@ -6,7 +6,7 @@
 /*   By: jrivoire <jrivoire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 12:09:20 by jrivoire          #+#    #+#             */
-/*   Updated: 2020/11/29 12:09:57 by jrivoire         ###   ########.fr       */
+/*   Updated: 2021/01/21 15:33:49 by jrivoire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,7 @@
 
 void	ft_putstr_fd(char *str, int fd)
 {
+	if (!str)
+		return ;
 	write(fd, str, ft_strlen(str));
 }

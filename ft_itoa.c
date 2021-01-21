@@ -6,7 +6,7 @@
 /*   By: jrivoire <jrivoire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/27 11:27:16 by jrivoire          #+#    #+#             */
-/*   Updated: 2020/11/27 15:14:32 by jrivoire         ###   ########.fr       */
+/*   Updated: 2021/01/21 15:19:43 by jrivoire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char			*ft_itoa(int n)
 	size_t			index;
 	unsigned int	nbr;
 
-	if (!(num = malloc(sizeof(num) * (len_num(n) + 1))))
+	if (!(num = malloc(sizeof(*num) * (len_num(n) + 1))))
 		return (NULL);
 	index = 0;
 	if (n < 0)
