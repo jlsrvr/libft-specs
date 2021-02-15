@@ -1,4 +1,4 @@
-#include "../libft.h"
+#include "../srcs/libft.h"
 #include <stdio.h>
 
 void specs_ft_putchar_fd(int *sucess, int *failure)
