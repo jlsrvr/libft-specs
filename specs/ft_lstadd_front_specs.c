@@ -1,4 +1,4 @@
-#include "../srcs/libft.h"
+#include "libft.h"
 #include <stdio.h>
 
 static void display_result(char *describe, t_list **result, t_list *new_elem, int success)

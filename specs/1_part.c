@@ -1,4 +1,4 @@
-#include "../srcs/libft.h"
+#include "libft.h"
 #include <strings.h>
 #include <ctype.h>
 #include <malloc/malloc.h>

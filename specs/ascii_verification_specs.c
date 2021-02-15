@@ -1,4 +1,4 @@
-#include "../srcs/libft.h"
+#include "libft.h"
 #include <stdio.h>
 #include <ctype.h>
 

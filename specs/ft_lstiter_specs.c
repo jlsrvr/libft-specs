@@ -1,4 +1,4 @@
-#include "../srcs/libft.h"
+#include "libft.h"
 #include <stdio.h>
 
 static void add_one_test(void *content)

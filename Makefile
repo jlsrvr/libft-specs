@@ -2,6 +2,10 @@ NAME			=	test
 
 CC				=	gcc
 
+IDIR			=	srcs/headers/
+
+LIBS			=	-L./srcs -lft
+
 OBJS_TEST		=	$(SRC_TEST:.c=.o)
 
 SRCS_TEST		=	$(addprefix specs/, $(SRC_TEST))
@@ -13,21 +17,23 @@ RM				=	rm -f
 FLAGS			=	-Wall -Wextra $(ARGS)
 
 .c.o:
-	$(CC) $(FLAGS) -c $< -o $(<:.c=.o)
-
-$(NAME):	$(OBJS_TEST) $(LIB)
-			$(CC) $(FLAGS) -o $(NAME) $(OBJS_TEST) -L ./srcs -lft
+	$(CC) $(FLAGS) -I$(IDIR) -c $< -o $(<:.c=.o)
 
 all:		$(NAME)
 
-LIB:
-	$(MAKE) -C srcs
+$(NAME):	make_lib $(OBJS_TEST)
+			$(CC) $(CFLAGS) -o $(NAME) $(OBJS_TEST) $(LIBS)
+
+make_lib:
+	@make libft.a -C ./srcs
 
 clean:
 	$(RM) $(OBJS_TEST)
+	@make clean -C ./srcs
 
 fclean: 	clean
 	$(RM) $(NAME)
+	@make fclean -C ./srcs
 
 re:			fclean all
 

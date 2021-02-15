@@ -1,4 +1,4 @@
-#include "../srcs/libft.h"
+#include "libft.h"
 
 void spec_first_part(void);
 void spec_second_part(void);
