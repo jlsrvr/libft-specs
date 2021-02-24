@@ -5,7 +5,7 @@ void specs_ft_strjoin(int *success, int *failure);
 void specs_ft_strtrim(int *success, int *failure);
 void specs_ft_split(int *success, int *failure);
 void specs_ft_itoa(int *success, int *failure);
-void specs_ft_itoa_base(int *success, int *failure);
+void specs_ft_uitoa_base(int *success, int *failure);
 void specs_ft_strmapi(int *success, int *failure);
 void specs_ft_putchar_fd(int *success, int *failure);
 void specs_ft_putstr_fd(int *success, int *failure);
@@ -44,7 +44,7 @@ void spec_second_part(void)
 	specs[7] = specs_ft_putstr_fd;
 	specs[8] = specs_ft_putendl_fd;
 	specs[9] = specs_ft_putnbr_fd;
-	specs[10] = specs_ft_itoa_base;
+	specs[10] = specs_ft_uitoa_base;
 	specs[11] = 0;
 
 	for (selected = 0; specs[selected]; selected++)
