@@ -81,4 +81,9 @@ void specs_ascii_verification(void)
 
 	printf("\nTests for ft_isalpha\n");
 	test_ascii_type(&isalpha, &ft_isalpha);
+
+	// -----------------------FT_ISALPHA--------------------------
+
+	printf("\nTests for ft_isspace\n");
+	test_ascii_type(&isspace, &ft_isspace);
 }
