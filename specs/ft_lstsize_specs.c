@@ -52,6 +52,7 @@ static void test_ft_lstsize(char *describe, t_list *list, int expected, int *suc
 		(*failure)++;
 		display_result(describe, list, expected, got, 0);
 	}
+	free(describe);
 }
 
 void specs_ft_lstsize(int *success, int *failure)
