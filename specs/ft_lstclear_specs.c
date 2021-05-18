@@ -22,7 +22,7 @@ static	void add_n_to_back(t_list *first, int n)
 	int size;
 
 	for (size = 0 ; size < n; size++)
-		ft_lstadd_back(&first, ft_lstnew(ft_strdup(ft_itoa(size))));
+		ft_lstadd_back(&first, ft_lstnew(ft_itoa(size)));
 }
 
 static void test_ft_lstclear(char *describe, t_list **to_del, void (*del)(void*), int expected_result, int *success, int *failure)
@@ -54,6 +54,8 @@ void specs_ft_lstclear(int *success, int *failure)
 	to_del = ft_lstnew(ft_strdup("first"));
 	add_n_to_back(to_del, 5);
 	test_ft_lstclear("Clearing 5 element long list", &to_del->next, &test_del_f, 5, success, failure);
+	free(to_del->content);
+	free(to_del);
 	to_del = NULL;
 	test_ft_lstclear("When list pointer is NULL", &to_del, &test_del_f, 0, success, failure);
 	test_ft_lstclear("When list pointer pointer is NULL", NULL, &test_del_f, 0, success, failure);
