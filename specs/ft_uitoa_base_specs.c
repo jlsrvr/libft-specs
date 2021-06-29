@@ -2,11 +2,11 @@
 #include <stdio.h>
 #include <string.h>
 
-static void display_result(uintmax_t n, char *expected, char *result, int success)
+static void display_result(t_uint_max n, char *expected, char *result, int success)
 {
 	printf("--------------\n");
 	(success) ? printf("\033[0;32mOK!\n") : printf("\033[0;31mKO!\n");
-	printf("For Integer [%lu]\n", n);
+	printf("For Integer [%llu]\n", n);
 	printf("Expected = \"%s\"\n", expected);
 	printf("Result	 = \"%s\"\n\n", result);
 	printf("\033[0m");
@@ -21,10 +21,10 @@ static int check_ft_uitoa_base(char *result, char *expected)
 
 static void run_tests(char *base, char **expected, int *sucess, int *failure)
 {
-	uintmax_t	my_int;
+	t_uint_max	my_int;
 	int			index;
 	char		*ptn_result;
-	uintmax_t	ints[6] = {22147483647, 2147483647, 0, 1 , 10, 399};
+	t_uint_max	ints[6] = {22147483647, 2147483647, 0, 1 , 10, 399};
 	for(index = 0; index < 6; index++)
 	{
 		my_int = ints[index];
