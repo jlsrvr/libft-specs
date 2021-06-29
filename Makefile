@@ -2,8 +2,10 @@ NAME			=	test
 
 ifeq ($(shell uname),Darwin)
 	CC		=	gcc
+	SYSTEM	=	macos
 else
 	CC		=	clang
+	SYSTEM	=	linux
 endif
 
 IDIR			=	srcs/headers/
@@ -18,7 +20,7 @@ SRC_TEST 		=	$(wildcard specs/*.c)
 
 RM				=	rm -f
 
-FLAGS			=	-Wall -Wextra $(ARGS)
+FLAGS			=	-Wall -Wextra -D SYSTEM=$(SYSTEM) $(ARGS)
 
 .c.o:
 	$(CC) $(FLAGS) -I$(IDIR) -c $< -o $(<:.c=.o)
