@@ -1,6 +1,10 @@
 NAME			=	test
 
-CC				=	gcc
+ifeq ($(shell uname),Darwin)
+	CC		=	gcc
+else
+	CC		=	clang
+endif
 
 IDIR			=	srcs/headers/
 
