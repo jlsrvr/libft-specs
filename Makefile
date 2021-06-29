@@ -1,16 +1,17 @@
 NAME			=	test
 
+
 ifeq ($(shell uname),Darwin)
 	CC		=	gcc
 	SYSTEM	=	macos
+	LIBS	=	-L./srcs -lft
 else
 	CC		=	clang
 	SYSTEM	=	linux
+	LIBS	=	-L./srcs -lft -lbsd
 endif
 
 IDIR			=	srcs/headers/
-
-LIBS			=	-L./srcs -lft -lbsd
 
 OBJS_TEST		=	$(SRC_TEST:.c=.o)
 

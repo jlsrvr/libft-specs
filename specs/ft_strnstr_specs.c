@@ -1,6 +1,10 @@
 #include "libft.h"
 #include <stdio.h>
-#include <bsd/string.h>
+#if SYSTEM == macos
+# include <string.h>
+#else
+# include <bsd/string.h>
+#endif
 
 static void display_result(char *expected, char *result, int success)
 {
