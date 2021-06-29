@@ -1,7 +1,13 @@
 #include "libft.h"
 #include <strings.h>
 #include <ctype.h>
-#include <malloc/malloc.h>
+#if SYSTEM == macos
+# include <malloc/malloc.h>
+# define MALLOC_SIZE(x) malloc_size(x)
+#else
+# include <malloc.h>
+# define MALLOC_SIZE(x) malloc_usable_size(x)
+#endif
 #include <stdio.h>
 
 void		print_null_begun_string(void *str, int size);
@@ -673,12 +679,12 @@ void test_calloc(size_t count, size_t size, int *succes, int *failure)
 {
 	void *ptn_expected = calloc(count, size);
 	void *ptn_result = ft_calloc(count, size);
-	if (((ptn_expected && ptn_result) || (ptn_result == ptn_expected)) && (malloc_size(ptn_expected) == malloc_size(ptn_result)) && !memcmp(ptn_expected, ptn_result, count*size))
+	if (((ptn_expected && ptn_result) || (ptn_result == ptn_expected)) && (MALLOC_SIZE(ptn_expected) == MALLOC_SIZE(ptn_result)) && !memcmp(ptn_expected, ptn_result, count*size))
 	{
 		(*succes)++;
 		/*printf("OK! for count = %zu and size %zu\n\n", count, size);
-		  printf("\033[1;32mExpected = \"%zu\"\n", malloc_size(ptn_expected));
-		  printf("Got = \"%zu\"\n\n",  malloc_size(ptn_result));
+		  printf("\033[1;32mExpected = \"%zu\"\n", MALLOC_SIZE(ptn_expected));
+		  printf("Got = \"%zu\"\n\n",  MALLOC_SIZE(ptn_result));
 		  printf("\033[0m");*/
 	}
 	else
