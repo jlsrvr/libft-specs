@@ -10,7 +10,7 @@ endif
 
 IDIR			=	srcs/headers/
 
-LIBS			=	-L./srcs -lft
+LIBS			=	-L./srcs -lft -lbsd
 
 OBJS_TEST		=	$(SRC_TEST:.c=.o)
 

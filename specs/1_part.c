@@ -5,6 +5,7 @@
 # include <malloc/malloc.h>
 # define MALLOC_SIZE(x) malloc_size(x)
 #else
+# include <bsd/string.h>
 # include <malloc.h>
 # define MALLOC_SIZE(x) malloc_usable_size(x)
 #endif
@@ -374,12 +375,12 @@ void spec_first_part(void)
 	test_memcmp(vide, vide , 1, &succes, &failure);
 	test_memcmp("   ", vide, 1, &succes, &failure);
 	test_memcmp("   ", "   " , 2, &succes, &failure);
-	test_memcmp("\t", "yeh" , 2, &succes, &failure);
+	test_memcmp("\t", "yeh" , 1, &succes, &failure);
 	char str_test_memcmp[3];
 	str_test_memcmp[0] = 'c';
 	str_test_memcmp[1] = -12;
 	str_test_memcmp[2] = 0;
-	test_memcmp("\t", str_test_memcmp , 2, &succes, &failure);
+	test_memcmp("\t", str_test_memcmp , 1, &succes, &failure);
 	test_memcmp(str_test_memcmp, str_test_memcmp , 2, &succes, &failure);
 	printf("\t%d success out of %d tests\n", succes, (succes + failure));
 
