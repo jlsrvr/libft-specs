@@ -1,6 +1,6 @@
 #include "libft.h"
 #include <stdio.h>
-#include <string.h>
+#include <bsd/string.h>
 
 static void display_result(char *expected, char *result, int success)
 {

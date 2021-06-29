@@ -101,10 +101,9 @@ void specs_ft_memcpy(void)
 	char src1[6] = "\t%1a";
 	char dest_expected1[25] = "J'ai un tab \"\t\" de 21";
 	char dest_result1[25] = "J'ai un tab \"\t\" de 21";
-	//void *src, void *dest_expected, void *dest_result, size_t n, size_t step, int string, int *success, int *failure
 	test_ft_memcpy(src1, dest_expected1, dest_result1, 6, 1, 1, &success, &failure);
 	test_ft_memcpy(NULL, dest_expected1, dest_result1, 1, 1, 1, &success, &failure); // Should return dest
 	test_ft_memcpy(src1, NULL, NULL, 1, 1, 1, &success, &failure); // Should return pointer NULL
-	test_ft_memcpy(NULL, NULL, NULL, 3, 1, 1, &success, &failure); // Should return pointer NULL
+	test_ft_memcpy(NULL, NULL, NULL, 1, 1, 1, &success, &failure); // Should return pointer NULL
 	printf("\t%d success out of %d tests\n", success, (success + failure));
 }
