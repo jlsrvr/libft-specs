@@ -15,8 +15,9 @@ void		print_null_begun_string(void *str, int size);
 int			comp_null_begun_strings(void *str1, void *str2, int size);
 void		test_ascii_change(int (*og)(int), int (*ft)(int));
 void		test_calloc(size_t count, size_t size, int *succes, int *failure);
-void		test_strncmp(char *str1, char *str2 , size_t len, int *succes, int *failure);
-void		test_memcmp(void *str1, void *str2 , size_t len, int *succes, int *failure);
+void		test_strncmp(char *str1, char *str2, size_t len, int *succes, int *failure);
+void		test_strcmp(char *str1, char *str2, int *succes, int *failure);
+void		test_memcmp(void *str1, void *str2, size_t len, int *succes, int *failure);
 void		specs_ascii_verification(void);
 void		specs_ft_strnstr(void);
 void		specs_ft_memcpy(void);
@@ -238,6 +239,29 @@ void spec_first_part(void)
 	str_test_ncmp[2] = 0;
 	test_strncmp("\t", str_test_ncmp , 5, &succes, &failure);
 	test_strncmp(str_test_ncmp, str_test_ncmp , 5, &succes, &failure);
+	printf("\t%d success out of %d tests\n", succes, (succes + failure));
+
+	// -----------------------FT_STRCMP--------------------------
+
+	printf("\nTests for ft_strcmp\n");
+
+	succes = 0;
+	failure = 0;
+	char *stringcmp = "a string";
+	char *watevacmp = "whatever";
+	char *videcmp = "";
+	test_strcmp(stringcmp, watevacmp, &succes, &failure);
+	test_strcmp(videcmp, "whatever", &succes, &failure);
+	test_strcmp(videcmp, videcmp, &succes, &failure);
+	test_strcmp("   ", videcmp, &succes, &failure);
+	test_strcmp("   ", "   ", &succes, &failure);
+	test_strcmp("\t", "yeh", &succes, &failure);
+	char str_test_cmp[3];
+	str_test_cmp[0] = 'c';
+	str_test_cmp[1] = -12;
+	str_test_cmp[2] = 0;
+	test_strcmp("\t", str_test_cmp, &succes, &failure);
+	test_strcmp(str_test_cmp, str_test_cmp, &succes, &failure);
 	printf("\t%d success out of %d tests\n", succes, (succes + failure));
 
 	// -----------------------FT_STRRCHR--------------------------
@@ -722,6 +746,34 @@ void test_strncmp(char *str1, char *str2 , size_t len, int *succes, int *failure
 		(*failure)++;
 		printf("--------------\n");
 		printf("\033[0;31mKO! comparing for \"%s\" with \"%s\" up to %zu\n\n", str1, str2, len);
+		printf("\033[1;32mExpected = %d\n", expected);
+		printf("\033[0;31mGot = %d\n\n", result);
+		printf("\033[0m");
+	}
+
+}
+
+void test_strcmp(char *str1, char *str2 , int *succes, int *failure)
+{
+	int		expected;
+	int		result;
+
+	expected = strcmp(str1, str2);
+	result = ft_strcmp(str1, str2);
+	if ( expected == result )
+	{
+		(*succes)++;
+		/*printf("\033[1;32m");
+		printf("OK! comparing for \"%s\" with \"%s\"\n\n", str1, str2);
+		printf("Expected = %d\n", expected);
+		printf("Got = %d\n\n",  result);
+		printf("\033[0m");*/
+	}
+	else
+	{
+		(*failure)++;
+		printf("--------------\n");
+		printf("\033[0;31mKO! comparing for \"%s\" with \"%s\" \n\n", str1, str2);
 		printf("\033[1;32mExpected = %d\n", expected);
 		printf("\033[0;31mGot = %d\n\n", result);
 		printf("\033[0m");
